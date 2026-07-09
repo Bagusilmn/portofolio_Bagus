@@ -298,6 +298,77 @@
 
   .loading-note{ font-family:var(--font-mono); font-size:12px; color:var(--text-faint); padding:20px 0; }
 
+  /* skills */
+  .skills-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .skills-card{ border:1px solid var(--line); border-radius:18px; padding:32px; background:var(--surface); }
+  .skills-card .sk-head{ display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+  .skills-card .sk-head .ic{ width:32px; height:32px; border-radius:9px; background:var(--accent-soft); display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .5s var(--ease); }
+  .skills-card .sk-head .ic svg{ width:17px; height:17px; stroke:var(--accent); transition:stroke .5s var(--ease); }
+  .skills-card .sk-head h3{ font-size:17px; }
+  .skills-card .sk-head span{ display:block; font-family:var(--font-mono); font-size:11px; color:var(--text-faint); margin-top:2px; }
+  .hard-skill{ margin-bottom:16px; }
+  .hard-skill:last-child{ margin-bottom:0; }
+  .hard-skill .hs-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:7px; }
+  .hard-skill .hs-name{ font-size:13.5px; font-weight:500; }
+  .hard-skill .hs-level{ font-family:var(--font-mono); font-size:10.5px; color:var(--text-faint); }
+  .hs-bar{ height:5px; border-radius:99px; background:var(--bg-soft); overflow:hidden; }
+  .hs-bar-fill{ height:100%; border-radius:99px; background:var(--accent); transition: background .5s var(--ease), width 1s var(--ease); width:0%; }
+  .soft-skill-tags{ display:flex; flex-wrap:wrap; gap:10px; }
+  .soft-tag{ font-family:var(--font-mono); font-size:12px; padding:9px 15px; border-radius:10px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text-dim); display:flex; align-items:center; gap:8px; }
+  .soft-tag .dot{ width:5px; height:5px; border-radius:50%; background:var(--accent); flex-shrink:0; transition:background .5s var(--ease); }
+
+  /* editable list section admin controls (experience / kepanitiaan) */
+  .tl-item{ position:relative; }
+  .tl-admin-controls, .pan-admin-controls{ display:none; gap:6px; }
+  .tl-item.admin-mode .tl-admin-controls{ display:flex; margin-top:10px; }
+  .pan-card.admin-mode .pan-admin-controls{ display:flex; position:absolute; top:14px; right:14px; z-index:2; }
+  .tl-admin-controls button, .pan-admin-controls button{ width:28px; height:28px; border-radius:7px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text-dim); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+  .tl-admin-controls button:hover, .pan-admin-controls button:hover{ border-color:var(--accent); color:var(--accent); }
+  .tl-admin-controls button.del:hover, .pan-admin-controls button.del:hover{ border-color:#FF6B6B; color:#FF6B6B; }
+  .add-tl-item{ border:1px dashed var(--line); border-radius:12px; display:none; align-items:center; justify-content:center; gap:8px; padding:18px; cursor:pointer; color:var(--text-faint); font-family:var(--font-mono); font-size:13px; margin-top:8px; transition: border-color .3s, color .3s; }
+  .add-tl-item.show{ display:flex; }
+  .add-tl-item:hover{ border-color:var(--accent); color:var(--accent); }
+
+  /* kepanitiaan */
+  .pan-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .pan-card{ position:relative; border:1px solid var(--line); border-radius:16px; padding:24px; background:var(--surface); transition: transform .35s var(--ease), border-color .35s var(--ease); }
+  .pan-card:hover{ transform:translateY(-4px); border-color:var(--accent); }
+  .pan-card .pan-date{ font-family:var(--font-mono); font-size:10.5px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; transition:color .5s var(--ease); }
+  .pan-card h4{ font-size:15.5px; margin:10px 0 4px; }
+  .pan-card .pan-event{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); display:block; margin-bottom:10px; }
+  .pan-card p{ font-size:13px; color:var(--text-dim); line-height:1.55; }
+  .add-pan-card{ border:1px dashed var(--line); border-radius:16px; display:none; align-items:center; justify-content:center; flex-direction:column; gap:8px; min-height:150px; cursor:pointer; color:var(--text-faint); font-family:var(--font-mono); font-size:13px; transition: border-color .3s, color .3s; }
+  .add-pan-card.show{ display:flex; }
+  .add-pan-card:hover{ border-color:var(--accent); color:var(--accent); }
+  .add-pan-card .plus{ font-size:26px; line-height:1; }
+
+  /* certificate carousel */
+  .cert-tabs{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px; }
+  .cert-tab{ font-family:var(--font-mono); font-size:12px; letter-spacing:.03em; padding:9px 16px; border-radius:999px; border:1px solid var(--line); color:var(--text-dim); background:var(--surface); cursor:pointer; transition:all .3s var(--ease); }
+  .cert-tab:hover{ border-color:var(--accent); color:var(--text); }
+  .cert-tab.active{ border-color:var(--accent); background:var(--accent); color:#0D0F1C; font-weight:500; }
+  .cert-carousel{ position:relative; }
+  .cert-viewport{ overflow:hidden; border-radius:20px; }
+  .cert-track{ display:flex; transition: transform .5s var(--ease); }
+  .cert-slide{ flex:0 0 100%; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:var(--surface); min-height:320px; }
+  .cert-slide .cert-img{ height:100%; min-height:280px; overflow:hidden; background:var(--bg-soft); }
+  .cert-slide .cert-img img{ width:100%; height:100%; object-fit:cover; }
+  .cert-slide .cert-text{ padding:36px 40px 36px 0; }
+  .cert-slide .cert-cat{ font-family:var(--font-mono); font-size:10.5px; color:var(--accent); letter-spacing:.08em; text-transform:uppercase; transition:color .5s var(--ease); }
+  .cert-slide h3{ font-size:23px; margin:12px 0 8px; }
+  .cert-slide .cert-issuer{ font-family:var(--font-mono); font-size:12px; color:var(--text-faint); margin-bottom:14px; display:block; }
+  .cert-slide p{ color:var(--text-dim); font-size:14.5px; line-height:1.6; }
+  .cert-nav{ display:flex; align-items:center; justify-content:space-between; margin-top:22px; }
+  .cert-arrows{ display:flex; gap:10px; }
+  .cert-arrow{ width:42px; height:42px; border-radius:50%; border:1px solid var(--line); background:var(--surface); color:var(--text-dim); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .25s; }
+  .cert-arrow:hover{ border-color:var(--accent); color:var(--accent); }
+  .cert-arrow svg{ width:16px; height:16px; }
+  .cert-dots{ display:flex; gap:7px; }
+  .cert-dots .cd{ width:6px; height:6px; border-radius:50%; background:var(--line); cursor:pointer; transition:all .3s var(--ease); }
+  .cert-dots .cd.active{ background:var(--accent); width:18px; border-radius:99px; }
+  .cert-counter{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); }
+  .cert-empty{ font-family:var(--font-mono); font-size:13px; color:var(--text-faint); border:1px dashed var(--line); border-radius:16px; padding:40px; text-align:center; }
+
   @media (max-width: 880px){
     .hero-inner{ grid-template-columns:1fr; }
     .photo-frame{ max-width:320px; margin:0 auto; aspect-ratio:3/4; }
@@ -310,6 +381,11 @@
     .nav-links{ display:none; }
     .contact-panel{ padding:36px 24px; }
     .tl-item{ grid-template-columns:90px 20px 1fr; }
+    .skills-grid{ grid-template-columns:1fr; }
+    .pan-grid{ grid-template-columns:1fr; }
+    .cert-slide{ grid-template-columns:1fr; }
+    .cert-slide .cert-img{ min-height:200px; }
+    .cert-slide .cert-text{ padding:24px; }
   }
 
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
@@ -330,8 +406,10 @@
     <div class="brand">BAGUS<span>.</span>ILMAN<span>.</span>HUDA</div>
     <ul class="nav-links">
       <li><a href="#about">Tentang</a></li>
+      <li><a href="#skills">Skill</a></li>
       <li><a href="#experience">Pengalaman</a></li>
       <li><a href="#projects">Proyek</a></li>
+      <li><a href="#certificates">Sertifikat</a></li>
       <li><a href="#contact">Kontak</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Hubungi Saya</a>
@@ -428,68 +506,87 @@
   </div>
 </section>
 
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">SKILL</span>
+      <h2>Yang saya kuasai secara teknis dan personal.</h2>
+      <p>Kombinasi hard skill lintas disiplin dan soft skill dari pengalaman berorganisasi.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skills-card">
+        <div class="sk-head">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6L2 12l6 6M16 6l6 6-6 6"/></svg></div>
+          <div>
+            <h3>Hard Skill</h3>
+            <span>Alat & kemampuan teknis</span>
+          </div>
+        </div>
+        <div class="hard-skill" data-level="90"><div class="hs-top"><span class="hs-name">Figma (UI/UX Design)</span><span class="hs-level">Mahir</span></div><div class="hs-bar"><div class="hs-bar-fill"></div></div></div>
+        <div class="hard-skill" data-level="85"><div class="hs-top"><span class="hs-name">Adobe Illustrator & Photoshop</span><span class="hs-level">Mahir</span></div><div class="hs-bar"><div class="hs-bar-fill"></div></div></div>
+        <div class="hard-skill" data-level="75"><div class="hs-top"><span class="hs-name">HTML, CSS & JavaScript</span><span class="hs-level">Menengah</span></div><div class="hs-bar"><div class="hs-bar-fill"></div></div></div>
+        <div class="hard-skill" data-level="80"><div class="hs-top"><span class="hs-name">Analisis & Perancangan Sistem</span><span class="hs-level">Mahir</span></div><div class="hs-bar"><div class="hs-bar-fill"></div></div></div>
+        <div class="hard-skill" data-level="78"><div class="hs-top"><span class="hs-name">Product Requirement Document (PRD)</span><span class="hs-level">Menengah</span></div><div class="hs-bar"><div class="hs-bar-fill"></div></div></div>
+        <div class="hard-skill" data-level="70"><div class="hs-top"><span class="hs-name">Software Testing</span><span class="hs-level">Menengah</span></div><div class="hs-bar"><div class="hs-bar-fill"></div></div></div>
+      </div>
+      <div class="skills-card">
+        <div class="sk-head">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <div>
+            <h3>Soft Skill</h3>
+            <span>Kemampuan personal & kolaborasi</span>
+          </div>
+        </div>
+        <div class="soft-skill-tags">
+          <span class="soft-tag"><span class="dot"></span>Komunikasi</span>
+          <span class="soft-tag"><span class="dot"></span>Negosiasi</span>
+          <span class="soft-tag"><span class="dot"></span>Kerja Tim</span>
+          <span class="soft-tag"><span class="dot"></span>Kepemimpinan</span>
+          <span class="soft-tag"><span class="dot"></span>Manajemen Waktu</span>
+          <span class="soft-tag"><span class="dot"></span>Berpikir Kritis</span>
+          <span class="soft-tag"><span class="dot"></span>Adaptasi</span>
+          <span class="soft-tag"><span class="dot"></span>Problem Solving</span>
+          <span class="soft-tag"><span class="dot"></span>Manajemen Stakeholder</span>
+          <span class="soft-tag"><span class="dot"></span>Public Speaking</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="experience">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">PENGALAMAN</span>
       <h2>Jejak lintas peran dan organisasi.</h2>
     </div>
-    <div class="timeline reveal">
-      <div class="tl-item">
-        <div class="tl-date">2022 — Kini</div>
-        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-content">
-          <h4>Anggota Divisi Litbang</h4>
-          <span class="org">Himpunan Mahasiswa Sistem Informasi (HIMASIF)</span>
-          <p>Bagian dari organisasi mahasiswa dan aktif di divisi penelitian & pengembangan.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Studi Independen</div>
-        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-content">
-          <h4>Product Management</h4>
-          <span class="org">Binar Academy</span>
-          <p>Riset pengguna, business model canvas, PRD, hingga usability testing untuk fitur Self Mentoring Quipper.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Proyek Kampus</div>
-        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-content">
-          <h4>UI/UX Design & Frontend</h4>
-          <span class="org">Telkom Jember</span>
-          <p>Merancang antarmuka dan membangun tampilan frontend untuk kebutuhan proyek kolaborasi.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Proyek Kampus</div>
-        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-content">
-          <h4>Frontend Coordinator</h4>
-          <span class="org">Proyek Pemrograman Berbasis Objek (SIMATA)</span>
-          <p>Mengoordinasikan pengembangan frontend sistem informasi akademik.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Proyek Kampus</div>
-        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-content">
-          <h4>Software Tester</h4>
-          <span class="org">SIMORIS — Sistem Monitoring Distribusi Inseminasi Buatan</span>
-          <p>Menguji perangkat lunak agroindustri untuk memastikan fungsi berjalan sesuai kebutuhan pengguna.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Freelance</div>
-        <div class="tl-dot-col"><div class="tl-dot"></div></div>
-        <div class="tl-content">
-          <h4>Graphic Designer</h4>
-          <span class="org">SEAL</span>
-          <p>Merancang materi visual untuk konten edukasi dan promosi digital.</p>
-        </div>
-      </div>
+
+    <div class="admin-bar" id="expAdminBar">
+      <span><span class="dot"></span>Mode admin aktif — kamu bisa tambah, ubah, dan hapus pengalaman</span>
+      <div class="admin-bar-actions"><button id="btnAddExp">+ Tambah Pengalaman</button></div>
     </div>
+
+    <p class="loading-note" id="expLoadingNote">Memuat pengalaman…</p>
+    <div class="timeline reveal" id="expTimeline" style="display:none;"></div>
+    <div class="add-tl-item" id="addExpItem"><span class="plus">+</span> Tambah Pengalaman</div>
+  </div>
+</section>
+
+<section id="committees">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">KEPANITIAAN</span>
+      <h2>Keterlibatan dalam kepanitiaan & acara.</h2>
+      <p>Peran-peran yang saya jalani dalam kepanitiaan kampus dan organisasi.</p>
+    </div>
+
+    <div class="admin-bar" id="panAdminBar">
+      <span><span class="dot"></span>Mode admin aktif — kamu bisa tambah, ubah, dan hapus kepanitiaan</span>
+      <div class="admin-bar-actions"><button id="btnAddPan">+ Tambah Kepanitiaan</button></div>
+    </div>
+
+    <p class="loading-note" id="panLoadingNote">Memuat kepanitiaan…</p>
+    <div class="pan-grid reveal" id="panGrid" style="display:none;"></div>
   </div>
 </section>
 
@@ -516,16 +613,24 @@
 
 <section id="certificates">
   <div class="wrap">
-    <div class="cert-panel reveal">
-      <div class="cert-img"><img src="assets/certificates.jpg" alt="Sertifikat kepanitiaan dan organisasi Bagus Ilman Huda"></div>
-      <div class="cert-text">
-        <span class="eyebrow">REKAM JEJAK</span>
-        <h3>Aktif berorganisasi, konsisten berkontribusi.</h3>
-        <p>Dari kepanitiaan, kompetisi bisnis, hingga peran struktural di organisasi kampus — berikut sebagian jejak keterlibatan saya selama masa studi.</p>
-        <div class="cert-stats">
-          <div><div class="n">13+</div><div class="l">Sertifikat</div></div>
-          <div><div class="n">4</div><div class="l">Finalis Lomba</div></div>
-          <div><div class="n">1</div><div class="l">Divisi Organisasi</div></div>
+    <div class="section-head reveal">
+      <span class="eyebrow">REKAM JEJAK</span>
+      <h2>Aktif berorganisasi, konsisten berkontribusi.</h2>
+      <p>Dari kompetisi, kepanitiaan, magang bersertifikat, hingga sertifikasi profesional — pilih kategori lalu geser untuk melihat detailnya.</p>
+    </div>
+
+    <div class="cert-tabs reveal" id="certTabs"></div>
+
+    <div class="cert-carousel reveal">
+      <div class="cert-viewport">
+        <div class="cert-track" id="certTrack"></div>
+      </div>
+      <div class="cert-nav">
+        <span class="cert-counter" id="certCounter"></span>
+        <div class="cert-dots" id="certDots"></div>
+        <div class="cert-arrows">
+          <button class="cert-arrow" id="certPrev" type="button" aria-label="Sebelumnya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="cert-arrow" id="certNext" type="button" aria-label="Berikutnya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
       </div>
     </div>
@@ -600,11 +705,47 @@
   </div>
 </div>
 
-<!-- delete confirm modal -->
+<!-- add / edit experience modal -->
+<div class="modal-overlay" id="expModal">
+  <div class="modal-panel wide">
+    <div class="modal-close" id="closeExpModal">×</div>
+    <h3 id="expModalTitle">Tambah Pengalaman</h3>
+    <p class="modal-sub">Isi detail pengalaman yang akan tampil di linimasa.</p>
+    <div class="modal-error" id="expError"></div>
+    <div class="field"><label>Periode</label><input type="text" id="eDate" placeholder="Contoh: 2022 — Kini"></div>
+    <div class="field"><label>Judul / Peran</label><input type="text" id="eTitle" placeholder="Contoh: UI/UX Designer"></div>
+    <div class="field"><label>Organisasi / Perusahaan</label><input type="text" id="eOrg" placeholder="Contoh: Telkom Jember"></div>
+    <div class="field"><label>Deskripsi</label><textarea id="eDesc" placeholder="Ceritakan singkat tanggung jawab dan hasilnya"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn-block ghost" id="cancelExp">Batal</button>
+      <button class="btn-block primary" id="saveExp">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- add / edit committee (kepanitiaan) modal -->
+<div class="modal-overlay" id="panModal">
+  <div class="modal-panel wide">
+    <div class="modal-close" id="closePanModal">×</div>
+    <h3 id="panModalTitle">Tambah Kepanitiaan</h3>
+    <p class="modal-sub">Isi detail keterlibatan kepanitiaan yang akan tampil di portofolio.</p>
+    <div class="modal-error" id="panError"></div>
+    <div class="field"><label>Periode</label><input type="text" id="pDate" placeholder="Contoh: 2024"></div>
+    <div class="field"><label>Peran / Jabatan</label><input type="text" id="pRole" placeholder="Contoh: Koordinator Publikasi & Dokumentasi"></div>
+    <div class="field"><label>Nama Acara / Kepanitiaan</label><input type="text" id="pEvent" placeholder="Contoh: IT Convert 2024"></div>
+    <div class="field"><label>Deskripsi</label><textarea id="pDesc" placeholder="Ceritakan singkat tugas dan kontribusinya"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn-block ghost" id="cancelPan">Batal</button>
+      <button class="btn-block primary" id="savePan">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- delete confirm modal (shared: project / experience / committee) -->
 <div class="modal-overlay" id="deleteModal">
   <div class="modal-panel">
     <div class="modal-close" id="closeDeleteModal">×</div>
-    <h3>Hapus proyek ini?</h3>
+    <h3 id="deleteModalTitle">Hapus item ini?</h3>
     <p class="modal-sub">Tindakan ini tidak bisa dibatalkan.</p>
     <div class="modal-actions">
       <button class="btn-block ghost" id="cancelDelete">Batal</button>
@@ -702,6 +843,218 @@
   window.renderProjects = function(list){ currentProjects = list; render(); };
   window.setAdminMode = function(isAdmin){ isAdminMode = isAdmin; render(); };
 
+  /* ---------- experience timeline (data-driven, admin editable) ---------- */
+  const expTimeline = document.getElementById('expTimeline');
+  const expLoadingNote = document.getElementById('expLoadingNote');
+  const addExpItem = document.getElementById('addExpItem');
+  let isAdminModeExp = false;
+  let currentExperience = [];
+
+  function tlItemHTML(item){
+    return `
+      <div class="tl-date">${escapeHTML(item.date)}</div>
+      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <h4>${escapeHTML(item.title)}</h4>
+        <span class="org">${escapeHTML(item.org)}</span>
+        <p>${escapeHTML(item.desc)}</p>
+        <div class="tl-admin-controls">
+          <button class="edit" title="Edit" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>
+          <button class="del" title="Hapus" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0l-1 14a2 2 0 01-2 2H7a2 2 0 01-2-2L4 6h16z"/></svg></button>
+        </div>
+      </div>`;
+  }
+
+  function renderExp(){
+    expTimeline.innerHTML = '';
+    currentExperience.forEach((item, i)=>{
+      const el = document.createElement('div');
+      el.className = 'tl-item' + (isAdminModeExp ? ' admin-mode' : '');
+      el.dataset.id = item.id;
+      if(i === currentExperience.length - 1){ el.style.paddingBottom = '0'; }
+      el.innerHTML = tlItemHTML(item);
+      expTimeline.appendChild(el);
+    });
+    expLoadingNote.style.display = 'none';
+    expTimeline.style.display = 'flex';
+    addExpItem.classList.toggle('show', isAdminModeExp);
+    expTimeline.querySelectorAll('.tl-admin-controls .edit').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const el = btn.closest('.tl-item');
+        const item = currentExperience.find(x=> String(x.id) === String(el.dataset.id));
+        if(window.openExpModal && item) window.openExpModal('edit', item);
+      });
+    });
+    expTimeline.querySelectorAll('.tl-admin-controls .del').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const el = btn.closest('.tl-item');
+        if(window.openDeleteModal) window.openDeleteModal(el.dataset.id, 'experience');
+      });
+    });
+  }
+
+  window.renderExperience = function(list){ currentExperience = list; renderExp(); };
+  window.setAdminModeExp = function(isAdmin){ isAdminModeExp = isAdmin; renderExp(); };
+
+  /* ---------- kepanitiaan grid (data-driven, admin editable) ---------- */
+  const panGrid = document.getElementById('panGrid');
+  const panLoadingNote = document.getElementById('panLoadingNote');
+  let isAdminModePan = false;
+  let currentCommittees = [];
+
+  function panCardHTML(item){
+    return `
+      <div class="pan-date">${escapeHTML(item.date)}</div>
+      <h4>${escapeHTML(item.role)}</h4>
+      <span class="pan-event">${escapeHTML(item.event)}</span>
+      <p>${escapeHTML(item.desc)}</p>
+      <div class="pan-admin-controls">
+        <button class="edit" title="Edit" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>
+        <button class="del" title="Hapus" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0l-1 14a2 2 0 01-2 2H7a2 2 0 01-2-2L4 6h16z"/></svg></button>
+      </div>`;
+  }
+
+  function renderPan(){
+    panGrid.innerHTML = '';
+    currentCommittees.forEach(item=>{
+      const el = document.createElement('div');
+      el.className = 'pan-card' + (isAdminModePan ? ' admin-mode' : '');
+      el.dataset.id = item.id;
+      el.innerHTML = panCardHTML(item);
+      panGrid.appendChild(el);
+    });
+    if(isAdminModePan){
+      const addCard = document.createElement('div');
+      addCard.className = 'add-pan-card show';
+      addCard.id = 'addPanCard';
+      addCard.innerHTML = '<div class="plus">+</div><div>Tambah Kepanitiaan</div>';
+      panGrid.appendChild(addCard);
+    }
+    panLoadingNote.style.display = 'none';
+    panGrid.style.display = 'grid';
+    panGrid.querySelectorAll('.pan-admin-controls .edit').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const el = btn.closest('.pan-card');
+        const item = currentCommittees.find(x=> String(x.id) === String(el.dataset.id));
+        if(window.openPanModal && item) window.openPanModal('edit', item);
+      });
+    });
+    panGrid.querySelectorAll('.pan-admin-controls .del').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const el = btn.closest('.pan-card');
+        if(window.openDeleteModal) window.openDeleteModal(el.dataset.id, 'committee');
+      });
+    });
+    const addCard = document.getElementById('addPanCard');
+    if(addCard){ addCard.addEventListener('click', ()=>{ if(window.openPanModal) window.openPanModal('add', null); }); }
+  }
+
+  window.renderCommittees = function(list){ currentCommittees = list; renderPan(); };
+  window.setAdminModePan = function(isAdmin){ isAdminModePan = isAdmin; renderPan(); };
+
+  /* ---------- certificate carousel (categorized, local data) ---------- */
+  const certCategories = {
+    sertifikasi: { label:'Sertifikasi Profesional', color:'#FFD166' },
+    lomba: { label:'Lomba & Kompetisi', color:'#FF9F5A' },
+    organisasi: { label:'Keorganisasian', color:'#7C5CFF' },
+    magang: { label:'Magang & Studi Independen', color:'#6EE7B7' }
+  };
+
+  const certificates = [
+    { id:'cert1', category:'sertifikasi', title:'Product Management — Studi Independen Bersertifikat', issuer:'Binar Academy × Kampus Merdeka', desc:'Sertifikat kelulusan program studi independen bersertifikat (MSIB) jalur Product Management, mencakup riset pengguna, business model canvas, PRD, hingga usability testing.', image:'assets/cert-pm.jpg' },
+    { id:'cert2', category:'sertifikasi', title:'UI/UX Design Fundamentals', issuer:'Skilvul / Kampus Merdeka', desc:'Sertifikat penyelesaian pelatihan dasar UI/UX Design meliputi riset pengguna, wireframing, dan prototyping.', image:'assets/cert-uiux.jpg' },
+    { id:'cert3', category:'lomba', title:'Finalis Business Case Competition', issuer:'Kompetisi Bisnis Tingkat Nasional', desc:'Meraih posisi finalis dalam kompetisi studi kasus bisnis bersama tim lintas jurusan.', image:'assets/cert-lomba1.jpg' },
+    { id:'cert4', category:'lomba', title:'Finalis Lomba Rancang UI/UX', issuer:'Kompetisi Tingkat Universitas', desc:'Finalis lomba perancangan antarmuka aplikasi dengan studi kasus produk digital lokal.', image:'assets/cert-lomba2.jpg' },
+    { id:'cert5', category:'organisasi', title:'Anggota Divisi Litbang HIMASIF', issuer:'Himpunan Mahasiswa Sistem Informasi', desc:'Sertifikat keanggotaan aktif di divisi penelitian dan pengembangan HIMASIF periode kepengurusan berjalan.', image:'assets/cert-org1.jpg' },
+    { id:'cert6', category:'organisasi', title:'Piagam Kepanitiaan IT Convert 2024', issuer:'HIMASIF — Universitas Jember', desc:'Piagam penghargaan atas kontribusi sebagai panitia acara tahunan IT Convert.', image:'assets/cert-org2.jpg' },
+    { id:'cert7', category:'magang', title:'Software Tester — Proyek SIMORIS', issuer:'Proyek Kolaborasi Kampus', desc:'Sertifikat keterlibatan sebagai penguji perangkat lunak pada sistem monitoring distribusi inseminasi buatan.', image:'assets/cert-magang1.jpg' },
+    { id:'cert8', category:'magang', title:'UI/UX Design & Frontend — Telkom Jember', issuer:'Proyek Kolaborasi Industri', desc:'Sertifikat partisipasi dalam proyek kolaborasi merancang antarmuka dan membangun tampilan frontend.', image:'assets/cert-magang2.jpg' }
+  ];
+
+  const certTabsEl = document.getElementById('certTabs');
+  const certTrackEl = document.getElementById('certTrack');
+  const certDotsEl = document.getElementById('certDots');
+  const certCounterEl = document.getElementById('certCounter');
+  const certPrevBtn = document.getElementById('certPrev');
+  const certNextBtn = document.getElementById('certNext');
+  let certActiveCategory = 'sertifikasi';
+  let certActiveIndex = 0;
+
+  function certSlideHTML(c){
+    const cat = certCategories[c.category] || certCategories.sertifikasi;
+    return `
+      <div class="cert-slide">
+        <div class="cert-img"><img src="${c.image}" alt="${escapeHTML(c.title)}" loading="lazy"></div>
+        <div class="cert-text">
+          <span class="cert-cat">${cat.label}</span>
+          <h3>${escapeHTML(c.title)}</h3>
+          <span class="cert-issuer">${escapeHTML(c.issuer)}</span>
+          <p>${escapeHTML(c.desc)}</p>
+        </div>
+      </div>`;
+  }
+
+  function renderCertTabs(){
+    certTabsEl.innerHTML = '';
+    Object.keys(certCategories).forEach(key=>{
+      const count = certificates.filter(c=> c.category === key).length;
+      if(!count) return;
+      const btn = document.createElement('button');
+      btn.className = 'cert-tab' + (key === certActiveCategory ? ' active' : '');
+      btn.type = 'button';
+      btn.textContent = `${certCategories[key].label} (${count})`;
+      btn.addEventListener('click', ()=>{ certActiveCategory = key; certActiveIndex = 0; renderCertTabs(); renderCertSlides(); });
+      certTabsEl.appendChild(btn);
+    });
+  }
+
+  function renderCertSlides(){
+    const items = certificates.filter(c=> c.category === certActiveCategory);
+    if(!items.length){
+      certTrackEl.innerHTML = '<div class="cert-slide"><div class="cert-empty" style="grid-column:1/-1;">Belum ada sertifikat pada kategori ini.</div></div>';
+      certDotsEl.innerHTML = '';
+      certCounterEl.textContent = '';
+      return;
+    }
+    certTrackEl.innerHTML = items.map(certSlideHTML).join('');
+    certDotsEl.innerHTML = items.map((_, i)=> `<span class="cd${i === certActiveIndex ? ' active' : ''}" data-i="${i}"></span>`).join('');
+    certDotsEl.querySelectorAll('.cd').forEach(dot=>{
+      dot.addEventListener('click', ()=>{ certActiveIndex = parseInt(dot.dataset.i, 10); updateCertTrack(); });
+    });
+    updateCertTrack();
+  }
+
+  function updateCertTrack(){
+    const items = certificates.filter(c=> c.category === certActiveCategory);
+    if(!items.length) return;
+    if(certActiveIndex < 0) certActiveIndex = items.length - 1;
+    if(certActiveIndex >= items.length) certActiveIndex = 0;
+    certTrackEl.style.transform = `translateX(-${certActiveIndex * 100}%)`;
+    certDotsEl.querySelectorAll('.cd').forEach((d,i)=> d.classList.toggle('active', i === certActiveIndex));
+    certCounterEl.textContent = `${certActiveIndex + 1} / ${items.length}`;
+  }
+
+  if(certPrevBtn){
+    certPrevBtn.addEventListener('click', ()=>{ certActiveIndex -= 1; updateCertTrack(); });
+    certNextBtn.addEventListener('click', ()=>{ certActiveIndex += 1; updateCertTrack(); });
+    renderCertTabs();
+    renderCertSlides();
+  }
+
+  /* ---------- hard skill bar fill animation on reveal ---------- */
+  const skillBars = document.querySelectorAll('.hard-skill');
+  const skillIo = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const fill = entry.target.querySelector('.hs-bar-fill');
+        const level = entry.target.dataset.level || 0;
+        requestAnimationFrame(()=>{ fill.style.width = level + '%'; });
+        skillIo.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  skillBars.forEach(el=> skillIo.observe(el));
+
   const root = document.documentElement;
   const photoDuotone = document.getElementById('photoDuotone');
   const photoIcon = document.getElementById('photoIcon');
@@ -728,10 +1081,6 @@
 
     pills.forEach(p=> p.classList.toggle('active', p.dataset.role === role));
     discCards.forEach(c=> c.classList.toggle('active', c.dataset.role === role));
-
-    if(filterProjects){
-      document.querySelectorAll('.proj-card').forEach(c=>{ c.classList.toggle('hidden', c.dataset.role !== role); });
-    }
   }
 
   pills.forEach(p=> p.addEventListener('click', ()=> setRole(p.dataset.role, true)));
@@ -784,26 +1133,52 @@
     { id:'p9', role:'graphic', title:'Highst — Merchandise & Branding', desc:'Desain merchandise (kaos, totebag, keychain) untuk brand komunitas Highst.', link:'', image:'assets/proj-26.jpg' }
   ];
 
+  const sampleExperience = [
+    { id:'e1', date:'2022 — Kini', title:'Anggota Divisi Litbang', org:'Himpunan Mahasiswa Sistem Informasi (HIMASIF)', desc:'Bagian dari organisasi mahasiswa dan aktif di divisi penelitian & pengembangan.' },
+    { id:'e2', date:'Studi Independen', title:'Product Management', org:'Binar Academy', desc:'Riset pengguna, business model canvas, PRD, hingga usability testing untuk fitur Self Mentoring Quipper.' },
+    { id:'e3', date:'Proyek Kampus', title:'UI/UX Design & Frontend', org:'Telkom Jember', desc:'Merancang antarmuka dan membangun tampilan frontend untuk kebutuhan proyek kolaborasi.' },
+    { id:'e4', date:'Proyek Kampus', title:'Frontend Coordinator', org:'Proyek Pemrograman Berbasis Objek (SIMATA)', desc:'Mengoordinasikan pengembangan frontend sistem informasi akademik.' },
+    { id:'e5', date:'Proyek Kampus', title:'Software Tester', org:'SIMORIS — Sistem Monitoring Distribusi Inseminasi Buatan', desc:'Menguji perangkat lunak agroindustri untuk memastikan fungsi berjalan sesuai kebutuhan pengguna.' },
+    { id:'e6', date:'Freelance', title:'Graphic Designer', org:'SEAL', desc:'Merancang materi visual untuk konten edukasi dan promosi digital.' }
+  ];
+
+  const sampleCommittees = [
+    { id:'c1', date:'2024', role:'Koordinator Publikasi & Dokumentasi', event:'IT Convert 2024 — HIMASIF', desc:'Mengoordinasikan publikasi, poster, dan dokumentasi visual acara tahunan IT Convert.' },
+    { id:'c2', date:'2023', role:'Panitia Divisi Acara', event:'Rektor Cup 2023 — Turnamen Basket Antar Fakultas', desc:'Membantu perencanaan rangkaian acara dan materi promosi turnamen.' },
+    { id:'c3', date:'2023', role:'Anggota Sie Perlengkapan', event:'Open Recruitment HIMASIF', desc:'Mendukung kebutuhan logistik dan teknis selama proses open recruitment anggota baru.' }
+  ];
+
   const isFirebaseConfigured = firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith('GANTI');
 
-  let app, auth, db, currentUser = null, editingId = null, deletingId = null;
+  let app, auth, db, currentUser = null;
+  let editingId = null, editingExpId = null, editingPanId = null;
+  let deletingId = null, deletingType = 'project';
 
   const loginModal = document.getElementById('loginModal');
   const projModal = document.getElementById('projModal');
+  const expModal = document.getElementById('expModal');
+  const panModal = document.getElementById('panModal');
   const deleteModal = document.getElementById('deleteModal');
   const adminFab = document.getElementById('adminFab');
   const adminBar = document.getElementById('adminBar');
+  const expAdminBar = document.getElementById('expAdminBar');
+  const panAdminBar = document.getElementById('panAdminBar');
   const projSectionSub = document.getElementById('projSectionSub');
+  const deleteModalTitle = document.getElementById('deleteModalTitle');
 
   function openModal(el){ el.classList.add('open'); }
   function closeModal(el){ el.classList.remove('open'); }
 
   document.getElementById('closeLogin').addEventListener('click', ()=> closeModal(loginModal));
   document.getElementById('closeProjModal').addEventListener('click', ()=> closeModal(projModal));
+  document.getElementById('closeExpModal').addEventListener('click', ()=> closeModal(expModal));
+  document.getElementById('closePanModal').addEventListener('click', ()=> closeModal(panModal));
   document.getElementById('closeDeleteModal').addEventListener('click', ()=> closeModal(deleteModal));
   document.getElementById('cancelProj').addEventListener('click', ()=> closeModal(projModal));
+  document.getElementById('cancelExp').addEventListener('click', ()=> closeModal(expModal));
+  document.getElementById('cancelPan').addEventListener('click', ()=> closeModal(panModal));
   document.getElementById('cancelDelete').addEventListener('click', ()=> closeModal(deleteModal));
-  [loginModal, projModal, deleteModal].forEach(m=>{ m.addEventListener('click', (e)=>{ if(e.target === m) closeModal(m); }); });
+  [loginModal, projModal, expModal, panModal, deleteModal].forEach(m=>{ m.addEventListener('click', (e)=>{ if(e.target === m) closeModal(m); }); });
 
   adminFab.addEventListener('click', ()=>{
     if(currentUser){ document.getElementById('projects').scrollIntoView({ behavior:'smooth' }); return; }
@@ -814,7 +1189,7 @@
   async function loadProjects(){
     if(!isFirebaseConfigured){
       window.renderProjects(sampleProjects);
-      projSectionSub.textContent = 'Klik salah satu peran di atas untuk memfilter proyek berdasarkan disiplin.';
+      projSectionSub.textContent = 'Semua proyek yang pernah saya kerjakan, lintas disiplin.';
       return;
     }
     try{
@@ -823,12 +1198,34 @@
       const list = [];
       snap.forEach(d=> list.push({ id:d.id, ...d.data() }));
       window.renderProjects(list.length ? list : sampleProjects);
-      projSectionSub.textContent = 'Klik salah satu peran di atas untuk memfilter proyek berdasarkan disiplin.';
+      projSectionSub.textContent = 'Semua proyek yang pernah saya kerjakan, lintas disiplin.';
     }catch(err){
       console.error(err);
       window.renderProjects(sampleProjects);
-      projSectionSub.textContent = 'Klik salah satu peran di atas untuk memfilter proyek berdasarkan disiplin.';
+      projSectionSub.textContent = 'Semua proyek yang pernah saya kerjakan, lintas disiplin.';
     }
+  }
+
+  async function loadExperience(){
+    if(!isFirebaseConfigured){ window.renderExperience(sampleExperience); return; }
+    try{
+      const q = query(collection(db,'experience'), orderBy('createdAt','asc'));
+      const snap = await getDocs(q);
+      const list = [];
+      snap.forEach(d=> list.push({ id:d.id, ...d.data() }));
+      window.renderExperience(list.length ? list : sampleExperience);
+    }catch(err){ console.error(err); window.renderExperience(sampleExperience); }
+  }
+
+  async function loadCommittees(){
+    if(!isFirebaseConfigured){ window.renderCommittees(sampleCommittees); return; }
+    try{
+      const q = query(collection(db,'committees'), orderBy('createdAt','desc'));
+      const snap = await getDocs(q);
+      const list = [];
+      snap.forEach(d=> list.push({ id:d.id, ...d.data() }));
+      window.renderCommittees(list.length ? list : sampleCommittees);
+    }catch(err){ console.error(err); window.renderCommittees(sampleCommittees); }
   }
 
   document.getElementById('submitLogin').addEventListener('click', async ()=>{
@@ -847,6 +1244,8 @@
 
   document.getElementById('btnLogout').addEventListener('click', async ()=>{ if(auth) await signOut(auth); });
   document.getElementById('btnAddProj').addEventListener('click', ()=> window.openProjModal('add', null));
+  document.getElementById('btnAddExp').addEventListener('click', ()=> window.openExpModal('add', null));
+  document.getElementById('btnAddPan').addEventListener('click', ()=> window.openPanModal('add', null));
 
   window.openProjModal = function(mode, proj){
     editingId = mode === 'edit' ? proj.id : null;
@@ -860,7 +1259,35 @@
     openModal(projModal);
   };
 
-  window.openDeleteModal = function(id){ deletingId = id; openModal(deleteModal); };
+  window.openExpModal = function(mode, item){
+    editingExpId = mode === 'edit' ? item.id : null;
+    document.getElementById('expModalTitle').textContent = mode === 'edit' ? 'Ubah Pengalaman' : 'Tambah Pengalaman';
+    document.getElementById('eDate').value = item ? item.date : '';
+    document.getElementById('eTitle').value = item ? item.title : '';
+    document.getElementById('eOrg').value = item ? item.org : '';
+    document.getElementById('eDesc').value = item ? item.desc : '';
+    document.getElementById('expError').textContent = '';
+    openModal(expModal);
+  };
+
+  window.openPanModal = function(mode, item){
+    editingPanId = mode === 'edit' ? item.id : null;
+    document.getElementById('panModalTitle').textContent = mode === 'edit' ? 'Ubah Kepanitiaan' : 'Tambah Kepanitiaan';
+    document.getElementById('pDate').value = item ? item.date : '';
+    document.getElementById('pRole').value = item ? item.role : '';
+    document.getElementById('pEvent').value = item ? item.event : '';
+    document.getElementById('pDesc').value = item ? item.desc : '';
+    document.getElementById('panError').textContent = '';
+    openModal(panModal);
+  };
+
+  window.openDeleteModal = function(id, type){
+    deletingId = id;
+    deletingType = type || 'project';
+    const labels = { project:'Hapus proyek ini?', experience:'Hapus pengalaman ini?', committee:'Hapus kepanitiaan ini?' };
+    deleteModalTitle.textContent = labels[deletingType] || 'Hapus item ini?';
+    openModal(deleteModal);
+  };
 
   document.getElementById('saveProj').addEventListener('click', async ()=>{
     const title = document.getElementById('fTitle').value.trim();
@@ -882,17 +1309,77 @@
     }catch(err){ errEl.textContent = 'Gagal menyimpan. Cek koneksi internet atau aturan Firestore.'; }
   });
 
+  document.getElementById('saveExp').addEventListener('click', async ()=>{
+    const date = document.getElementById('eDate').value.trim();
+    const title = document.getElementById('eTitle').value.trim();
+    const org = document.getElementById('eOrg').value.trim();
+    const desc = document.getElementById('eDesc').value.trim();
+    const errEl = document.getElementById('expError');
+    if(!date || !title || !org || !desc){ errEl.textContent = 'Semua kolom wajib diisi.'; return; }
+    if(!currentUser){ errEl.textContent = 'Sesi admin berakhir, silakan login ulang.'; return; }
+    if(!isFirebaseConfigured){ errEl.textContent = 'Firebase belum dikonfigurasi.'; return; }
+    try{
+      if(editingExpId){
+        await updateDoc(doc(db,'experience',editingExpId), { date, title, org, desc });
+      } else {
+        await addDoc(collection(db,'experience'), { date, title, org, desc, createdAt: serverTimestamp() });
+      }
+      closeModal(expModal);
+      loadExperience();
+    }catch(err){ errEl.textContent = 'Gagal menyimpan. Cek koneksi internet atau aturan Firestore.'; }
+  });
+
+  document.getElementById('savePan').addEventListener('click', async ()=>{
+    const date = document.getElementById('pDate').value.trim();
+    const role = document.getElementById('pRole').value.trim();
+    const event = document.getElementById('pEvent').value.trim();
+    const desc = document.getElementById('pDesc').value.trim();
+    const errEl = document.getElementById('panError');
+    if(!date || !role || !event || !desc){ errEl.textContent = 'Semua kolom wajib diisi.'; return; }
+    if(!currentUser){ errEl.textContent = 'Sesi admin berakhir, silakan login ulang.'; return; }
+    if(!isFirebaseConfigured){ errEl.textContent = 'Firebase belum dikonfigurasi.'; return; }
+    try{
+      if(editingPanId){
+        await updateDoc(doc(db,'committees',editingPanId), { date, role, event, desc });
+      } else {
+        await addDoc(collection(db,'committees'), { date, role, event, desc, createdAt: serverTimestamp() });
+      }
+      closeModal(panModal);
+      loadCommittees();
+    }catch(err){ errEl.textContent = 'Gagal menyimpan. Cek koneksi internet atau aturan Firestore.'; }
+  });
+
   document.getElementById('confirmDelete').addEventListener('click', async ()=>{
     if(!deletingId || !currentUser) return;
-    try{ await deleteDoc(doc(db,'projects',deletingId)); }catch(err){ console.error(err); }
+    try{
+      if(deletingType === 'experience'){
+        await deleteDoc(doc(db,'experience',deletingId));
+      } else if(deletingType === 'committee'){
+        await deleteDoc(doc(db,'committees',deletingId));
+      } else {
+        await deleteDoc(doc(db,'projects',deletingId));
+      }
+    }catch(err){ console.error(err); }
     closeModal(deleteModal);
-    loadProjects();
+    if(deletingType === 'experience') loadExperience();
+    else if(deletingType === 'committee') loadCommittees();
+    else loadProjects();
   });
 
   function setAdminVisuals(isAdmin){
     adminFab.classList.toggle('is-admin', isAdmin);
     adminBar.classList.toggle('show', isAdmin);
+    expAdminBar.classList.toggle('show', isAdmin);
+    panAdminBar.classList.toggle('show', isAdmin);
     window.setAdminMode(isAdmin);
+    window.setAdminModeExp(isAdmin);
+    window.setAdminModePan(isAdmin);
+  }
+
+  function loadAll(){
+    loadProjects();
+    loadExperience();
+    loadCommittees();
   }
 
   if(isFirebaseConfigured){
@@ -903,11 +1390,11 @@
       onAuthStateChanged(auth, (user)=>{
         currentUser = user;
         setAdminVisuals(!!user);
-        loadProjects();
+        loadAll();
       });
-    }catch(err){ console.error('Firebase init gagal', err); loadProjects(); }
+    }catch(err){ console.error('Firebase init gagal', err); loadAll(); }
   } else {
-    loadProjects();
+    loadAll();
   }
 </script>
 
