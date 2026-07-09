@@ -41,570 +41,296 @@
   }
 
   ::selection{ background:var(--accent); color:#fff; }
-
   a{ color:inherit; text-decoration:none; }
   ul{ list-style:none; }
   img{ max-width:100%; display:block; }
 
-  .wrap{
-    max-width:1160px;
-    margin:0 auto;
-    padding:0 32px;
-  }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }
 
   .eyebrow{
-    font-family:var(--font-mono);
-    font-size:12px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--accent);
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--accent);
+    display:inline-flex; align-items:center; gap:10px;
     transition: color .5s var(--ease);
   }
-  .eyebrow::before{
-    content:'';
-    width:16px; height:1px;
-    background:var(--accent);
-    display:inline-block;
-    transition: background .5s var(--ease);
-  }
+  .eyebrow::before{ content:''; width:16px; height:1px; background:var(--accent); display:inline-block; transition: background .5s var(--ease); }
 
   h1,h2,h3{ font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em; }
 
-  /* ---------- grid backdrop ---------- */
+  /* grain texture overlay */
+  .grain{
+    position:fixed; inset:0; z-index:2; pointer-events:none;
+    opacity:.05; mix-blend-mode:overlay;
+  }
   .grid-bg{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 64px 64px;
-    opacity:.18;
-    pointer-events:none;
+    position:fixed; inset:0; z-index:0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px; opacity:.16; pointer-events:none;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
   }
+  .glow-blob{
+    position:fixed; z-index:0; pointer-events:none; border-radius:50%;
+    filter: blur(90px); opacity:.22; transition: background .8s var(--ease);
+  }
+  .glow-1{ width:520px; height:520px; top:-120px; right:-120px; background:var(--accent); }
+  .glow-2{ width:420px; height:420px; bottom:10%; left:-160px; background:var(--accent); opacity:.12; }
 
-  /* ---------- nav ---------- */
   nav{
-    position:fixed; top:0; left:0; right:0;
-    z-index:100;
-    padding:22px 0;
+    position:fixed; top:0; left:0; right:0; z-index:100; padding:22px 0;
     transition: background .4s var(--ease), border-color .4s var(--ease), padding .4s var(--ease);
     border-bottom:1px solid transparent;
   }
-  nav.scrolled{
-    background:rgba(13,15,28,0.82);
-    backdrop-filter: blur(14px);
-    border-bottom:1px solid var(--line);
-    padding:14px 0;
-  }
+  nav.scrolled{ background:rgba(13,15,28,0.82); backdrop-filter: blur(14px); border-bottom:1px solid var(--line); padding:14px 0; }
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; }
-  .brand{
-    font-family:var(--font-mono);
-    font-size:14px;
-    letter-spacing:.04em;
-  }
+  .brand{ font-family:var(--font-mono); font-size:14px; letter-spacing:.04em; }
   .brand span{ color:var(--accent); transition:color .5s var(--ease); }
-  .nav-links{ display:flex; gap:36px; }
-  .nav-links a{
-    font-size:13px;
-    color:var(--text-dim);
-    font-family:var(--font-mono);
-    letter-spacing:.03em;
-    transition:color .3s;
-    position:relative;
-  }
+  .nav-links{ display:flex; gap:32px; }
+  .nav-links a{ font-size:13px; color:var(--text-dim); font-family:var(--font-mono); letter-spacing:.03em; transition:color .3s; }
   .nav-links a:hover{ color:var(--text); }
   .nav-cta{
-    font-family:var(--font-mono);
-    font-size:13px;
-    padding:9px 18px;
-    border:1px solid var(--accent);
-    border-radius:999px;
-    color:var(--text);
-    transition: background .3s, border-color .5s var(--ease), color .3s;
+    font-family:var(--font-mono); font-size:13px; padding:9px 18px; border:1px solid var(--accent);
+    border-radius:999px; color:var(--text); transition: background .3s, border-color .5s var(--ease), color .3s;
   }
   .nav-cta:hover{ background:var(--accent); }
-  .nav-toggle{ display:none; }
 
-  /* ---------- hero ---------- */
-  header.hero{
-    position:relative;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:140px 0 80px;
-    z-index:1;
+  header.hero{ position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:150px 0 70px; z-index:1; }
+  .hero-inner{ display:grid; grid-template-columns: 1.1fr .9fr; gap:56px; align-items:center; }
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim);
+    border:1px solid var(--line); border-radius:999px; padding:7px 14px; margin-bottom:22px;
   }
-  .hero-inner{
-    display:grid;
-    grid-template-columns: 1.25fr .95fr;
-    gap:48px;
-    align-items:center;
-  }
-  .hero-name{
-    font-size:clamp(46px, 7vw, 92px);
-    line-height:0.98;
-    margin:20px 0 22px;
-  }
-  .hero-name .last{
-    display:block;
-    color:var(--text-dim);
-    font-weight:500;
-  }
-  .hero-tagline{
-    font-size:18px;
-    color:var(--text-dim);
-    max-width:480px;
-    margin-bottom:36px;
-    min-height:54px;
-  }
-  .hero-tagline .hi{
-    color:var(--accent);
-    font-weight:500;
-    transition: color .5s var(--ease);
-  }
+  .hero-badge .pulse{ width:7px; height:7px; border-radius:50%; background:var(--mint); animation: pulse 2s infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.5; transform:scale(1.3); } }
 
-  .role-switch{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:44px;
-  }
+  .hero-name{ font-size:clamp(44px, 6.4vw, 84px); line-height:0.98; margin-bottom:20px; }
+  .hero-name .last{ display:block; color:var(--text-dim); font-weight:500; }
+  .hero-tagline{ font-size:17.5px; color:var(--text-dim); max-width:480px; margin-bottom:32px; min-height:52px; }
+  .hero-tagline .hi{ color:var(--accent); font-weight:500; transition: color .5s var(--ease); }
+
+  .role-switch{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:40px; }
   .role-pill{
-    font-family:var(--font-mono);
-    font-size:12px;
-    letter-spacing:.04em;
-    padding:9px 16px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    color:var(--text-dim);
-    background:var(--surface);
-    cursor:pointer;
-    transition: all .35s var(--ease);
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.04em; padding:9px 16px; border-radius:999px;
+    border:1px solid var(--line); color:var(--text-dim); background:var(--surface); cursor:pointer; transition: all .35s var(--ease);
   }
   .role-pill:hover{ border-color:var(--accent); color:var(--text); }
-  .role-pill.active{
-    border-color:var(--accent);
-    color:#0D0F1C;
-    background:var(--accent);
-    font-weight:500;
-  }
+  .role-pill.active{ border-color:var(--accent); color:#0D0F1C; background:var(--accent); font-weight:500; }
 
-  .hero-ctas{ display:flex; gap:16px; align-items:center; }
+  .hero-ctas{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
   .btn-primary{
-    font-family:var(--font-mono);
-    font-size:13px;
-    padding:14px 26px;
-    background:var(--accent);
-    color:#0D0F1C;
-    border-radius:8px;
-    font-weight:500;
-    transition: background .5s var(--ease), transform .3s;
-    display:inline-block;
+    font-family:var(--font-mono); font-size:13px; padding:14px 26px; background:var(--accent); color:#0D0F1C;
+    border-radius:8px; font-weight:500; transition: background .5s var(--ease), transform .3s; display:inline-block;
   }
   .btn-primary:hover{ transform:translateY(-2px); }
-  .btn-ghost{
-    font-family:var(--font-mono);
-    font-size:13px;
-    color:var(--text-dim);
-    border-bottom:1px solid var(--line);
-    padding-bottom:2px;
-    transition:color .3s, border-color .3s;
-  }
+  .btn-ghost{ font-family:var(--font-mono); font-size:13px; color:var(--text-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .3s, border-color .3s; }
   .btn-ghost:hover{ color:var(--text); border-color:var(--text); }
 
-  /* hero schematic panel */
-  .schematic{
-    position:relative;
-    aspect-ratio: 1/1;
-    border:1px solid var(--line);
-    border-radius:20px;
-    background:
-      radial-gradient(circle at 30% 20%, var(--accent-soft), transparent 55%),
-      var(--surface);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
+  /* hero photo panel */
+  .photo-frame{
+    position:relative; aspect-ratio: 4/5; border-radius:22px; overflow:hidden;
+    border:1px solid var(--line); background:var(--surface);
+  }
+  .photo-frame img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); }
+  .photo-duotone{
+    position:absolute; inset:0; background:var(--accent); mix-blend-mode:color; opacity:.85;
     transition: background .6s var(--ease);
   }
-  .schematic::before{
-    content:'';
-    position:absolute; inset:0;
-    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:28px 28px;
-    opacity:.35;
+  .photo-duotone::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 45%, rgba(0,0,0,.65) 100%);
+    mix-blend-mode:normal;
   }
-  .schematic-icon{
-    position:relative;
-    width:56%; height:56%;
-    z-index:1;
+  .photo-tag{
+    position:absolute; bottom:22px; left:22px; right:22px; z-index:2;
+    display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
   }
-  .schematic-icon svg{
-    width:100%; height:100%;
-    stroke:var(--accent);
-    transition: stroke .5s var(--ease);
+  .photo-tag .role-label{ font-family:var(--font-mono); font-size:11px; color:#fff; letter-spacing:.06em; }
+  .photo-tag .role-label b{ display:block; font-family:var(--font-display); font-size:19px; font-weight:600; margin-top:3px; }
+  .photo-corner{
+    position:absolute; top:18px; right:18px; z-index:2;
+    width:38px; height:38px; border-radius:10px;
+    background:rgba(13,15,28,.55); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center;
   }
-  .schematic-tag{
-    position:absolute;
-    bottom:20px; left:20px;
-    font-family:var(--font-mono);
-    font-size:11px;
-    color:var(--text-faint);
-    letter-spacing:.08em;
-    z-index:1;
-  }
-  .schematic-tag b{ color:var(--text); font-weight:500; }
+  .photo-corner svg{ width:18px; height:18px; stroke:#fff; }
 
-  .scroll-cue{
-    position:absolute;
-    bottom:36px; left:32px;
-    display:flex; align-items:center; gap:10px;
-    font-family:var(--font-mono);
-    font-size:11px;
-    color:var(--text-faint);
-    letter-spacing:.1em;
-  }
-  .scroll-cue .line{
-    width:1px; height:34px;
-    background:linear-gradient(var(--accent), transparent);
-    animation: scrollpulse 2s infinite;
-  }
-  @keyframes scrollpulse{
-    0%,100%{ opacity:.3; } 50%{ opacity:1; }
-  }
+  .scroll-cue{ position:absolute; bottom:32px; left:32px; display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:11px; color:var(--text-faint); letter-spacing:.1em; }
+  .scroll-cue .line{ width:1px; height:34px; background:linear-gradient(var(--accent), transparent); animation: scrollpulse 2s infinite; }
+  @keyframes scrollpulse{ 0%,100%{ opacity:.3; } 50%{ opacity:1; } }
 
-  /* ---------- section shell ---------- */
-  section{ position:relative; z-index:1; padding:120px 0; }
-  .section-head{ margin-bottom:56px; max-width:620px; }
+  section{ position:relative; z-index:1; padding:110px 0; }
+  .section-head{ margin-bottom:52px; max-width:620px; }
   .section-head h2{ font-size:clamp(28px,4vw,42px); margin-top:14px; }
   .section-head p{ color:var(--text-dim); margin-top:16px; font-size:16px; }
 
   .reveal{ opacity:0; transform:translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   .reveal.in-view{ opacity:1; transform:translateY(0); }
 
-  /* ---------- about ---------- */
-  .about-grid{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:64px;
-    align-items:start;
-  }
+  .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:64px; align-items:start; }
   .about-text p{ color:var(--text-dim); font-size:16px; margin-bottom:18px; }
   .about-text strong{ color:var(--text); font-weight:600; }
-  .about-facts{ display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
-  .fact{
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:22px;
-    background:var(--surface);
-  }
-  .fact .num{ font-family:var(--font-display); font-size:30px; color:var(--accent); transition:color .5s var(--ease); }
-  .fact .label{ font-family:var(--font-mono); font-size:11px; color:var(--text-faint); letter-spacing:.06em; margin-top:6px; text-transform:uppercase; }
+  .about-facts{ display:grid; grid-template-columns: repeat(2,1fr); gap:16px; margin-top:8px; }
+  .fact{ border:1px solid var(--line); border-radius:14px; padding:20px; background:var(--surface); }
+  .fact .num{ font-family:var(--font-display); font-size:28px; color:var(--accent); transition:color .5s var(--ease); }
+  .fact .label{ font-family:var(--font-mono); font-size:10.5px; color:var(--text-faint); letter-spacing:.05em; margin-top:6px; text-transform:uppercase; }
 
-  /* ---------- expertise ---------- */
   .disc-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
+    display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:16px; overflow:hidden;
   }
-  .disc-card{
-    background:var(--bg-soft);
-    padding:28px 20px;
-    cursor:pointer;
-    transition: background .35s var(--ease);
-    display:flex; flex-direction:column; gap:14px;
-  }
+  .disc-card{ background:var(--bg-soft); padding:26px 18px; cursor:pointer; transition: background .35s var(--ease); display:flex; flex-direction:column; gap:12px; }
   .disc-card:hover, .disc-card.active{ background:var(--surface-2); }
-  .disc-card .ic{ width:26px; height:26px; }
+  .disc-card .ic{ width:24px; height:24px; }
   .disc-card .ic svg{ width:100%; height:100%; stroke:var(--text-dim); transition:stroke .35s var(--ease); }
   .disc-card.active .ic svg, .disc-card:hover .ic svg{ stroke:var(--accent); }
-  .disc-card h3{ font-size:15px; font-weight:500; font-family:var(--font-body); }
-  .disc-card p{ font-size:12.5px; color:var(--text-faint); line-height:1.55; }
+  .disc-card h3{ font-size:14.5px; font-weight:500; font-family:var(--font-body); }
+  .disc-card p{ font-size:12px; color:var(--text-faint); line-height:1.5; }
 
-  /* ---------- projects ---------- */
-  .proj-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:24px;
+  /* timeline */
+  .timeline{ display:flex; flex-direction:column; }
+  .tl-item{
+    display:grid; grid-template-columns:130px 24px 1fr; gap:0;
+    padding-bottom:36px; position:relative;
   }
-  .proj-card{
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
-    background:var(--surface);
-    transition: transform .4s var(--ease), border-color .4s var(--ease), opacity .4s var(--ease);
-  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-date{ font-family:var(--font-mono); font-size:12px; color:var(--text-faint); padding-top:3px; }
+  .tl-dot-col{ display:flex; flex-direction:column; align-items:center; }
+  .tl-dot{ width:10px; height:10px; border-radius:50%; background:var(--accent); margin-top:6px; transition:background .5s var(--ease); flex-shrink:0; }
+  .tl-line{ width:1px; flex:1; background:var(--line); margin-top:6px; }
+  .tl-item:last-child .tl-line{ display:none; }
+  .tl-content{ padding-left:20px; padding-bottom:4px; }
+  .tl-content h4{ font-size:16px; font-weight:600; margin-bottom:4px; }
+  .tl-content .org{ font-family:var(--font-mono); font-size:12px; color:var(--accent); transition:color .5s var(--ease); margin-bottom:8px; display:inline-block; }
+  .tl-content p{ font-size:13.5px; color:var(--text-faint); line-height:1.55; }
+
+  .proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+  .proj-card{ position:relative; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--surface); transition: transform .4s var(--ease), border-color .4s var(--ease), opacity .4s var(--ease); }
   .proj-card:hover{ transform:translateY(-6px); border-color:var(--accent); }
   .proj-card.hidden{ display:none; }
-  .proj-thumb{
-    height:180px;
-    position:relative;
-    background: linear-gradient(135deg, var(--surface-2), var(--bg-soft));
-    display:flex; align-items:center; justify-content:center;
-    overflow:hidden;
-  }
-  .proj-thumb::after{
-    content:'';
-    position:absolute; inset:0;
-    background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:22px 22px;
-    opacity:.4;
-  }
-  .proj-thumb .ic{ width:44px; height:44px; z-index:1; }
-  .proj-thumb .ic svg{ width:100%; height:100%; stroke:var(--accent); transition:stroke .4s var(--ease); }
+  .proj-thumb{ height:200px; position:relative; background: linear-gradient(135deg, var(--surface-2), var(--bg-soft)); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .proj-thumb img{ width:100%; height:100%; object-fit:cover; transition: transform .5s var(--ease); }
+  .proj-card:hover .proj-thumb img{ transform:scale(1.05); }
+  .proj-thumb::after{ content:''; position:absolute; inset:0; background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:22px 22px; opacity:.4; }
+  .proj-thumb.noimg .ic{ width:44px; height:44px; z-index:1; }
+  .proj-thumb.noimg .ic svg{ width:100%; height:100%; stroke:var(--accent); transition:stroke .4s var(--ease); }
   .proj-body{ padding:22px 24px 26px; }
   .proj-tag{ font-family:var(--font-mono); font-size:10.5px; color:var(--accent); letter-spacing:.08em; text-transform:uppercase; transition:color .4s var(--ease); }
-  .proj-body h3{ font-size:19px; margin:10px 0 8px; }
-  .proj-body p{ font-size:14px; color:var(--text-dim); margin-bottom:14px; }
+  .proj-body h3{ font-size:18px; margin:10px 0 8px; }
+  .proj-body p{ font-size:13.5px; color:var(--text-dim); margin-bottom:14px; }
   .proj-link{ font-family:var(--font-mono); font-size:12px; color:var(--text-dim); display:inline-flex; align-items:center; gap:6px; }
   .proj-link:hover{ color:var(--text); }
 
-  /* ---------- process ---------- */
-  .process-strip{
-    display:flex;
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
-  }
-  .process-step{
-    flex:1;
-    padding:26px 22px;
-    border-right:1px solid var(--line);
-    background:var(--bg-soft);
-  }
-  .process-step:last-child{ border-right:none; }
-  .process-step .eyebrow{ font-size:10.5px; margin-bottom:12px; }
-  .process-step h4{ font-family:var(--font-body); font-size:14.5px; font-weight:600; margin-bottom:6px; }
-  .process-step p{ font-size:12.5px; color:var(--text-faint); line-height:1.55; }
+  /* certificates */
+  .cert-panel{ display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:center; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:var(--surface); }
+  .cert-img{ height:100%; min-height:280px; overflow:hidden; }
+  .cert-img img{ width:100%; height:100%; object-fit:cover; }
+  .cert-text{ padding:36px 40px 36px 0; }
+  .cert-text h3{ font-size:24px; margin:12px 0 14px; }
+  .cert-text p{ color:var(--text-dim); font-size:15px; margin-bottom:20px; }
+  .cert-stats{ display:flex; gap:28px; }
+  .cert-stats div{ }
+  .cert-stats .n{ font-family:var(--font-display); font-size:26px; color:var(--accent); transition:color .5s var(--ease); }
+  .cert-stats .l{ font-family:var(--font-mono); font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.05em; margin-top:2px; }
 
-  /* ---------- contact ---------- */
   .contact-panel{
-    border:1px solid var(--line);
-    border-radius:24px;
-    padding:64px;
+    border:1px solid var(--line); border-radius:24px; padding:64px;
     background: radial-gradient(circle at 15% 20%, var(--accent-soft), transparent 60%), var(--surface);
-    text-align:left;
-    position:relative;
-    overflow:hidden;
-    transition:background .6s var(--ease);
+    position:relative; overflow:hidden; transition:background .6s var(--ease);
   }
   .contact-panel h2{ font-size:clamp(30px,5vw,52px); max-width:640px; }
   .contact-panel p{ color:var(--text-dim); margin-top:16px; max-width:480px; font-size:16px; }
   .contact-links{ display:flex; gap:14px; margin-top:36px; flex-wrap:wrap; }
-  .contact-links a{
-    font-family:var(--font-mono);
-    font-size:13px;
-    padding:12px 22px;
-    border:1px solid var(--line);
-    border-radius:999px;
-    transition: border-color .3s, color .3s;
-  }
+  .contact-links a{ font-family:var(--font-mono); font-size:13px; padding:12px 22px; border:1px solid var(--line); border-radius:999px; transition: border-color .3s, color .3s; }
   .contact-links a:hover{ border-color:var(--accent); color:var(--accent); }
   .contact-links a.primary{ background:var(--accent); color:#0D0F1C; border-color:var(--accent); font-weight:500; }
   .contact-links a.primary:hover{ color:#0D0F1C; }
 
-  footer{
-    padding:36px 0 48px;
-    border-top:1px solid var(--line);
-    margin-top:60px;
-  }
+  footer{ padding:36px 0 48px; border-top:1px solid var(--line); margin-top:40px; }
   footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
   footer p{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); }
 
-  @media (max-width: 880px){
-    .hero-inner{ grid-template-columns:1fr; }
-    .schematic{ max-width:320px; margin:0 auto; }
-    .about-grid{ grid-template-columns:1fr; gap:36px; }
-    .disc-grid{ grid-template-columns:repeat(2,1fr); }
-    .proj-grid{ grid-template-columns:1fr; }
-    .process-strip{ flex-direction:column; }
-    .process-step{ border-right:none; border-bottom:1px solid var(--line); }
-    .process-step:last-child{ border-bottom:none; }
-    .nav-links{ display:none; }
-    .contact-panel{ padding:36px 24px; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation:none !important; transition:none !important; }
-  }
-
-  /* ---------- admin / login ---------- */
-  .admin-fab{
-    position:fixed;
-    bottom:24px; right:24px;
-    width:48px; height:48px;
-    border-radius:50%;
-    background:var(--surface);
-    border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    z-index:200;
-    transition: border-color .3s, background .3s, transform .3s;
-  }
+  /* admin / login */
+  .admin-fab{ position:fixed; bottom:24px; right:24px; width:48px; height:48px; border-radius:50%; background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:200; transition: border-color .3s, background .3s, transform .3s; }
   .admin-fab:hover{ border-color:var(--accent); transform:translateY(-2px); }
   .admin-fab svg{ width:18px; height:18px; stroke:var(--text-dim); }
   .admin-fab.is-admin{ background:var(--accent); border-color:var(--accent); }
   .admin-fab.is-admin svg{ stroke:#0D0F1C; }
 
-  .modal-overlay{
-    position:fixed; inset:0;
-    background:rgba(6,7,15,0.72);
-    backdrop-filter: blur(6px);
-    display:none;
-    align-items:center; justify-content:center;
-    z-index:300;
-    padding:20px;
-  }
+  .modal-overlay{ position:fixed; inset:0; background:rgba(6,7,15,0.72); backdrop-filter: blur(6px); display:none; align-items:center; justify-content:center; z-index:300; padding:20px; }
   .modal-overlay.open{ display:flex; }
-  .modal-panel{
-    width:100%; max-width:420px;
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:32px;
-    position:relative;
-  }
+  .modal-panel{ width:100%; max-width:420px; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:32px; position:relative; }
   .modal-panel.wide{ max-width:520px; }
-  .modal-close{
-    position:absolute; top:18px; right:18px;
-    width:28px; height:28px;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--text-faint);
-    cursor:pointer;
-    font-size:18px;
-    border-radius:50%;
-    transition: background .2s, color .2s;
-  }
+  .modal-close{ position:absolute; top:18px; right:18px; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:var(--text-faint); cursor:pointer; font-size:18px; border-radius:50%; transition: background .2s, color .2s; }
   .modal-close:hover{ background:var(--surface-2); color:var(--text); }
   .modal-panel h3{ font-size:20px; margin-bottom:6px; }
   .modal-sub{ font-size:13px; color:var(--text-faint); margin-bottom:22px; }
   .field{ margin-bottom:16px; }
   .field label{ display:block; font-family:var(--font-mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--text-faint); margin-bottom:8px; }
-  .field input, .field textarea, .field select{
-    width:100%;
-    background:var(--bg-soft);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:11px 14px;
-    color:var(--text);
-    font-family:var(--font-body);
-    font-size:14px;
-    outline:none;
-    transition:border-color .25s;
-  }
+  .field input, .field textarea, .field select{ width:100%; background:var(--bg-soft); border:1px solid var(--line); border-radius:8px; padding:11px 14px; color:var(--text); font-family:var(--font-body); font-size:14px; outline:none; transition:border-color .25s; }
   .field input:focus, .field textarea:focus, .field select:focus{ border-color:var(--accent); }
   .field textarea{ resize:vertical; min-height:80px; }
-  .modal-error{
-    font-size:12.5px; color:#FF6B6B;
-    margin-bottom:14px; min-height:16px;
-  }
+  .modal-error{ font-size:12.5px; color:#FF6B6B; margin-bottom:14px; min-height:16px; }
   .modal-actions{ display:flex; gap:10px; margin-top:6px; }
-  .btn-block{
-    flex:1;
-    font-family:var(--font-mono);
-    font-size:13px;
-    padding:12px;
-    border-radius:8px;
-    text-align:center;
-    cursor:pointer;
-    border:1px solid var(--line);
-    background:transparent;
-    color:var(--text-dim);
-    transition: all .25s;
-  }
+  .btn-block{ flex:1; font-family:var(--font-mono); font-size:13px; padding:12px; border-radius:8px; text-align:center; cursor:pointer; border:1px solid var(--line); background:transparent; color:var(--text-dim); transition: all .25s; }
   .btn-block.primary{ background:var(--accent); border-color:var(--accent); color:#0D0F1C; font-weight:500; }
   .btn-block.primary:hover{ opacity:.9; }
   .btn-block.ghost:hover{ border-color:var(--text-dim); color:var(--text); }
   .btn-block.danger{ border-color:#FF6B6B; color:#FF6B6B; }
   .btn-block.danger:hover{ background:#FF6B6B; color:#0D0F1C; }
 
-  .admin-bar{
-    display:none;
-    align-items:center; justify-content:space-between;
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:14px 18px;
-    margin-bottom:24px;
-    font-family:var(--font-mono);
-    font-size:12.5px;
-  }
+  .admin-bar{ display:none; align-items:center; justify-content:space-between; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin-bottom:24px; font-family:var(--font-mono); font-size:12.5px; flex-wrap:wrap; gap:10px; }
   .admin-bar.show{ display:flex; }
   .admin-bar .dot{ width:7px; height:7px; border-radius:50%; background:var(--mint); display:inline-block; margin-right:8px; }
   .admin-bar-actions{ display:flex; gap:10px; }
-  .admin-bar button{
-    font-family:var(--font-mono); font-size:12px;
-    padding:7px 14px; border-radius:6px;
-    border:1px solid var(--line); background:transparent; color:var(--text-dim);
-    cursor:pointer; transition:all .2s;
-  }
+  .admin-bar button{ font-family:var(--font-mono); font-size:12px; padding:7px 14px; border-radius:6px; border:1px solid var(--line); background:transparent; color:var(--text-dim); cursor:pointer; transition:all .2s; }
   .admin-bar button:hover{ border-color:var(--accent); color:var(--text); }
 
-  .proj-card{ position:relative; }
-  .proj-admin-controls{
-    position:absolute; top:12px; right:12px;
-    display:none;
-    gap:6px;
-    z-index:2;
-  }
+  .proj-admin-controls{ position:absolute; top:12px; right:12px; display:none; gap:6px; z-index:2; }
   .proj-card.admin-mode .proj-admin-controls{ display:flex; }
-  .proj-admin-controls button{
-    width:30px; height:30px;
-    border-radius:8px;
-    border:1px solid var(--line);
-    background:rgba(13,15,28,0.85);
-    color:var(--text-dim);
-    cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    transition:all .2s;
-  }
+  .proj-admin-controls button{ width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:rgba(13,15,28,0.85); color:var(--text-dim); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
   .proj-admin-controls button:hover{ border-color:var(--accent); color:var(--accent); }
   .proj-admin-controls button.del:hover{ border-color:#FF6B6B; color:#FF6B6B; }
 
-  .add-proj-card{
-    border:1px dashed var(--line);
-    border-radius:16px;
-    display:none;
-    align-items:center; justify-content:center;
-    flex-direction:column;
-    gap:10px;
-    min-height:180px;
-    cursor:pointer;
-    color:var(--text-faint);
-    font-family:var(--font-mono);
-    font-size:13px;
-    transition: border-color .3s, color .3s;
-  }
+  .add-proj-card{ border:1px dashed var(--line); border-radius:16px; display:none; align-items:center; justify-content:center; flex-direction:column; gap:10px; min-height:200px; cursor:pointer; color:var(--text-faint); font-family:var(--font-mono); font-size:13px; transition: border-color .3s, color .3s; }
   .add-proj-card.show{ display:flex; }
   .add-proj-card:hover{ border-color:var(--accent); color:var(--accent); }
   .add-proj-card .plus{ font-size:28px; line-height:1; }
 
-  .loading-note{
-    font-family:var(--font-mono); font-size:12px; color:var(--text-faint);
-    padding:20px 0;
+  .loading-note{ font-family:var(--font-mono); font-size:12px; color:var(--text-faint); padding:20px 0; }
+
+  @media (max-width: 880px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .photo-frame{ max-width:320px; margin:0 auto; aspect-ratio:3/4; }
+    .about-grid{ grid-template-columns:1fr; gap:36px; }
+    .disc-grid{ grid-template-columns:repeat(2,1fr); }
+    .proj-grid{ grid-template-columns:1fr; }
+    .cert-panel{ grid-template-columns:1fr; }
+    .cert-text{ padding:28px 28px 36px; }
+    .cert-img{ min-height:220px; }
+    .nav-links{ display:none; }
+    .contact-panel{ padding:36px 24px; }
+    .tl-item{ grid-template-columns:90px 20px 1fr; }
   }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
 </style>
 </head>
 <body>
 
+<svg class="grain" width="0" height="0">
+  <filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter>
+</svg>
+<div class="grain" style="filter:url(#noiseFilter);"></div>
 <div class="grid-bg"></div>
+<div class="glow-blob glow-1" id="glow1"></div>
+<div class="glow-blob glow-2" id="glow2"></div>
 
 <nav id="nav">
   <div class="wrap">
     <div class="brand">BAGUS<span>.</span>ILMAN<span>.</span>HUDA</div>
     <ul class="nav-links">
       <li><a href="#about">Tentang</a></li>
-      <li><a href="#expertise">Keahlian</a></li>
+      <li><a href="#experience">Pengalaman</a></li>
       <li><a href="#projects">Proyek</a></li>
       <li><a href="#contact">Kontak</a></li>
     </ul>
@@ -615,7 +341,7 @@
 <header class="hero">
   <div class="wrap hero-inner">
     <div>
-      <span class="eyebrow">MULTIDISCIPLINARY PRACTITIONER</span>
+      <div class="hero-badge"><span class="pulse"></span> Mahasiswa Sistem Informasi — Universitas Jember</div>
       <h1 class="hero-name">Bagus Ilman<span class="last">Huda.</span></h1>
       <p class="hero-tagline">Bekerja di persimpangan <span class="hi" id="typeRole">desain antarmuka</span> — merancang, menganalisis, dan membangun produk digital dari ide sampai jadi.</p>
 
@@ -633,11 +359,15 @@
       </div>
     </div>
 
-    <div class="schematic">
-      <div class="schematic-icon" id="schematicIcon">
-        <!-- icons injected by JS -->
+    <div class="photo-frame">
+      <img src="assets/bagus-photo.jpg" alt="Bagus Ilman Huda">
+      <div class="photo-duotone" id="photoDuotone"></div>
+      <div class="photo-corner" id="photoIcon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="9" rx="1.5"/><rect x="9" y="11" width="12" height="9" rx="1.5"/></svg>
       </div>
-      <div class="schematic-tag">peran aktif — <b id="schematicLabel">UI/UX Design</b></div>
+      <div class="photo-tag">
+        <div class="role-label">peran aktif<b id="schematicLabel">UI/UX Design</b></div>
+      </div>
     </div>
   </div>
 
@@ -652,11 +382,13 @@
         <h2 style="margin-top:14px;">Satu orang, lima cara melihat masalah yang sama.</h2>
       </div>
       <div class="reveal about-text" style="transition-delay:.1s;">
-        <p>Saya <strong>Bagus Ilman Huda</strong>, seorang praktisi produk digital yang nyaman berpindah peran — dari merancang alur pengguna, menyusun identitas visual, memetakan proses sistem, menulis antarmuka di kode, hingga menyusun prioritas roadmap.</p>
-        <p>Pendekatan saya sederhana: <strong>desain yang baik butuh logika sistem, dan sistem yang baik butuh rasa desain.</strong> Kombinasi kelima keahlian ini membantu saya berkomunikasi lintas tim — dari desainer, engineer, sampai stakeholder bisnis — tanpa kehilangan detail penting di setiap serah terima.</p>
+        <p>Saya <strong>Bagus Ilman Huda</strong>, mahasiswa Sistem Informasi di Universitas Jember dengan minat besar di bidang IT dan bisnis. Saya pernah berperan sebagai <strong>software tester, desainer UI/UX, frontend developer, desainer grafis, hingga product manager</strong> — didukung keterampilan komunikasi dan negosiasi dari pengalaman berorganisasi.</p>
+        <p>Kombinasi kelima keahlian ini membantu saya berkomunikasi lintas tim — dari desainer, engineer, sampai stakeholder bisnis — tanpa kehilangan detail penting di setiap serah terima.</p>
         <div class="about-facts">
-          <div class="fact"><div class="num">5</div><div class="label">Disiplin yang dikuasai</div></div>
-          <div class="fact"><div class="num">360°</div><div class="label">Pendekatan end-to-end</div></div>
+          <div class="fact"><div class="num">5</div><div class="label">Disiplin dikuasai</div></div>
+          <div class="fact"><div class="num">9+</div><div class="label">Proyek nyata</div></div>
+          <div class="fact"><div class="num">13+</div><div class="label">Sertifikat</div></div>
+          <div class="fact"><div class="num">2022</div><div class="label">Aktif di HIMASIF</div></div>
         </div>
       </div>
     </div>
@@ -668,44 +400,94 @@
     <div class="section-head reveal">
       <span class="eyebrow">KEAHLIAN</span>
       <h2>Lima lensa, satu cara berpikir.</h2>
-      <p>Klik salah satu untuk melihat bagaimana peran ini membentuk cara saya bekerja — dan proyek yang relevan di bawah akan menyesuaikan.</p>
+      <p>Klik salah satu untuk melihat bagaimana peran ini membentuk cara saya bekerja — proyek di bawah akan menyesuaikan.</p>
     </div>
 
     <div class="disc-grid reveal" id="discGrid">
       <div class="disc-card active" data-role="uiux">
-        <div class="ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="9" rx="1.5"/><rect x="9" y="11" width="12" height="9" rx="1.5"/></svg>
-        </div>
-        <h3>UI/UX Design</h3>
-        <p>Riset pengguna, wireframe, dan prototipe yang teruji sebelum jadi kode.</p>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="9" rx="1.5"/><rect x="9" y="11" width="12" height="9" rx="1.5"/></svg></div>
+        <h3>UI/UX Design</h3><p>Riset pengguna, wireframe, dan prototipe yang teruji sebelum jadi kode.</p>
       </div>
       <div class="disc-card" data-role="graphic">
-        <div class="ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3.2"/><path d="M11 15.5L16 6l6 14H11z"/></svg>
-        </div>
-        <h3>Desain Grafis</h3>
-        <p>Identitas visual, layout, dan aset brand yang konsisten di semua kanal.</p>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3.2"/><path d="M11 15.5L16 6l6 14H11z"/></svg></div>
+        <h3>Desain Grafis</h3><p>Identitas visual, layout, dan aset brand yang konsisten di semua kanal.</p>
       </div>
       <div class="disc-card" data-role="system">
-        <div class="ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.6L11 16M17.2 7.6L13 16"/></svg>
-        </div>
-        <h3>Systems Analyst</h3>
-        <p>Memetakan proses bisnis jadi alur sistem yang jelas dan bisa dieksekusi tim.</p>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.6L11 16M17.2 7.6L13 16"/></svg></div>
+        <h3>Systems Analyst</h3><p>Memetakan proses bisnis jadi alur sistem yang jelas dan bisa dieksekusi tim.</p>
       </div>
       <div class="disc-card" data-role="frontend">
-        <div class="ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6L2 12l6 6M16 6l6 6-6 6"/></svg>
-        </div>
-        <h3>Frontend Dev</h3>
-        <p>Menerjemahkan desain jadi antarmuka nyata — presisi, responsif, dan cepat.</p>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6L2 12l6 6M16 6l6 6-6 6"/></svg></div>
+        <h3>Frontend Dev</h3><p>Menerjemahkan desain jadi antarmuka nyata — presisi, responsif, dan cepat.</p>
       </div>
       <div class="disc-card" data-role="product">
-        <div class="ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></div>
+        <h3>Product Mgmt</h3><p>Menyusun prioritas, roadmap, dan keputusan berbasis data & kebutuhan pengguna.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">PENGALAMAN</span>
+      <h2>Jejak lintas peran dan organisasi.</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-date">2022 — Kini</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h4>Anggota Divisi Litbang</h4>
+          <span class="org">Himpunan Mahasiswa Sistem Informasi (HIMASIF)</span>
+          <p>Bagian dari organisasi mahasiswa dan aktif di divisi penelitian & pengembangan.</p>
         </div>
-        <h3>Product Mgmt</h3>
-        <p>Menyusun prioritas, roadmap, dan keputusan berbasis data & kebutuhan pengguna.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Studi Independen</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h4>Product Management</h4>
+          <span class="org">Binar Academy</span>
+          <p>Riset pengguna, business model canvas, PRD, hingga usability testing untuk fitur Self Mentoring Quipper.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Proyek Kampus</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h4>UI/UX Design & Frontend</h4>
+          <span class="org">Telkom Jember</span>
+          <p>Merancang antarmuka dan membangun tampilan frontend untuk kebutuhan proyek kolaborasi.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Proyek Kampus</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h4>Frontend Coordinator</h4>
+          <span class="org">Proyek Pemrograman Berbasis Objek (SIMATA)</span>
+          <p>Mengoordinasikan pengembangan frontend sistem informasi akademik.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Proyek Kampus</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h4>Software Tester</h4>
+          <span class="org">SIMORIS — Sistem Monitoring Distribusi Inseminasi Buatan</span>
+          <p>Menguji perangkat lunak agroindustri untuk memastikan fungsi berjalan sesuai kebutuhan pengguna.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Freelance</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <h4>Graphic Designer</h4>
+          <span class="org">SEAL</span>
+          <p>Merancang materi visual untuk konten edukasi dan promosi digital.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -716,7 +498,7 @@
     <div class="section-head reveal">
       <span class="eyebrow">PROYEK PILIHAN</span>
       <h2>Beberapa hal yang pernah saya kerjakan.</h2>
-      <p id="projSectionSub">Ganti judul, deskripsi, dan tautan di bawah ini dengan proyek asli Anda — bagian ini masih memakai data contoh.</p>
+      <p id="projSectionSub">Memuat proyek…</p>
     </div>
 
     <div class="admin-bar" id="adminBar">
@@ -728,38 +510,23 @@
     </div>
 
     <p class="loading-note" id="loadingNote">Memuat proyek…</p>
-    <div class="proj-grid reveal" id="projGrid" style="display:none;">
-      <!-- cards injected by JS -->
-    </div>
+    <div class="proj-grid reveal" id="projGrid" style="display:none;"></div>
   </div>
 </section>
 
-<section id="process">
+<section id="certificates">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">CARA KERJA</span>
-      <h2>Dari masalah ke solusi yang bisa dipakai.</h2>
-    </div>
-    <div class="process-strip reveal">
-      <div class="process-step">
-        <span class="eyebrow">GALI</span>
-        <h4>Pahami masalah</h4>
-        <p>Riset, wawancara, dan pemetaan proses sebelum menyentuh desain.</p>
-      </div>
-      <div class="process-step">
-        <span class="eyebrow">RANCANG</span>
-        <h4>Bentuk solusi</h4>
-        <p>Wireframe, alur sistem, dan visual disusun berdampingan.</p>
-      </div>
-      <div class="process-step">
-        <span class="eyebrow">BANGUN</span>
-        <h4>Wujudkan</h4>
-        <p>Kode, aset, dan dokumentasi disiapkan untuk siap pakai.</p>
-      </div>
-      <div class="process-step">
-        <span class="eyebrow">UJI</span>
-        <h4>Validasi & iterasi</h4>
-        <p>Uji dengan pengguna nyata, ukur, lalu perbaiki lagi.</p>
+    <div class="cert-panel reveal">
+      <div class="cert-img"><img src="assets/certificates.jpg" alt="Sertifikat kepanitiaan dan organisasi Bagus Ilman Huda"></div>
+      <div class="cert-text">
+        <span class="eyebrow">REKAM JEJAK</span>
+        <h3>Aktif berorganisasi, konsisten berkontribusi.</h3>
+        <p>Dari kepanitiaan, kompetisi bisnis, hingga peran struktural di organisasi kampus — berikut sebagian jejak keterlibatan saya selama masa studi.</p>
+        <div class="cert-stats">
+          <div><div class="n">13+</div><div class="l">Sertifikat</div></div>
+          <div><div class="n">4</div><div class="l">Finalis Lomba</div></div>
+          <div><div class="n">1</div><div class="l">Divisi Organisasi</div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -772,10 +539,9 @@
       <h2>Punya proyek? Mari bicarakan.</h2>
       <p>Terbuka untuk kolaborasi, proyek lepas, maupun peran penuh waktu di bidang desain, sistem, atau produk.</p>
       <div class="contact-links">
-        <a href="mailto:hello@bagusilmanhuda.com" class="primary">hello@bagusilmanhuda.com</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Instagram</a>
-        <a href="#">GitHub</a>
+        <a href="mailto:bagusilmanhuda@gmail.com" class="primary">bagusilmanhuda@gmail.com</a>
+        <a href="https://www.linkedin.com/in/bagusilmanhuda" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com/bagus_ilmn" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </div>
@@ -800,17 +566,9 @@
     <h3>Masuk sebagai admin</h3>
     <p class="modal-sub">Khusus Bagus Ilman Huda. Login ini pakai Firebase Authentication.</p>
     <div class="modal-error" id="loginError"></div>
-    <div class="field">
-      <label>Email</label>
-      <input type="email" id="loginEmail" placeholder="email-kamu@contoh.com" autocomplete="username">
-    </div>
-    <div class="field">
-      <label>Password</label>
-      <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
-    </div>
-    <div class="modal-actions">
-      <button class="btn-block primary" id="submitLogin">Masuk</button>
-    </div>
+    <div class="field"><label>Email</label><input type="email" id="loginEmail" placeholder="email-kamu@contoh.com" autocomplete="username"></div>
+    <div class="field"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="modal-actions"><button class="btn-block primary" id="submitLogin">Masuk</button></div>
   </div>
 </div>
 
@@ -821,14 +579,8 @@
     <h3 id="projModalTitle">Tambah Proyek</h3>
     <p class="modal-sub">Isi detail proyek yang akan tampil di portofolio.</p>
     <div class="modal-error" id="projError"></div>
-    <div class="field">
-      <label>Judul Proyek</label>
-      <input type="text" id="fTitle" placeholder="Contoh: Redesain Aplikasi Kasir">
-    </div>
-    <div class="field">
-      <label>Deskripsi Singkat</label>
-      <textarea id="fDesc" placeholder="Ceritakan singkat masalah dan solusinya"></textarea>
-    </div>
+    <div class="field"><label>Judul Proyek</label><input type="text" id="fTitle" placeholder="Contoh: Redesain Aplikasi Kasir"></div>
+    <div class="field"><label>Deskripsi Singkat</label><textarea id="fDesc" placeholder="Ceritakan singkat masalah dan solusinya"></textarea></div>
     <div class="field">
       <label>Kategori</label>
       <select id="fRole">
@@ -839,10 +591,8 @@
         <option value="product">Product Mgmt</option>
       </select>
     </div>
-    <div class="field">
-      <label>Link Proyek (opsional)</label>
-      <input type="url" id="fLink" placeholder="https://...">
-    </div>
+    <div class="field"><label>Link Proyek (opsional)</label><input type="url" id="fLink" placeholder="https://..."></div>
+    <div class="field"><label>URL Gambar (opsional)</label><input type="url" id="fImage" placeholder="https://... atau assets/nama-file.jpg"></div>
     <div class="modal-actions">
       <button class="btn-block ghost" id="cancelProj">Batal</button>
       <button class="btn-block primary" id="saveProj">Simpan</button>
@@ -864,38 +614,17 @@
 </div>
 
 <script>
-  // ---------- data per role ----------
   const roleData = {
-    uiux: {
-      label:'UI/UX Design',
-      tagline:'desain antarmuka',
-      color:'#7C5CFF',
-      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="9" rx="1.5"/><rect x="9" y="11" width="12" height="9" rx="1.5"/></svg>'
-    },
-    graphic: {
-      label:'Desain Grafis',
-      tagline:'identitas visual',
-      color:'#FF9F5A',
-      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3.2"/><path d="M11 15.5L16 6l6 14H11z"/></svg>'
-    },
-    system: {
-      label:'Systems Analyst',
-      tagline:'analisis sistem',
-      color:'#6EE7B7',
-      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.6L11 16M17.2 7.6L13 16"/></svg>'
-    },
-    frontend: {
-      label:'Frontend Development',
-      tagline:'pengembangan frontend',
-      color:'#5AB8FF',
-      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6L2 12l6 6M16 6l6 6-6 6"/></svg>'
-    },
-    product: {
-      label:'Product Management',
-      tagline:'manajemen produk',
-      color:'#FFD166',
-      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>'
-    }
+    uiux: { label:'UI/UX Design', tagline:'desain antarmuka', color:'#7C5CFF',
+      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="9" rx="1.5"/><rect x="9" y="11" width="12" height="9" rx="1.5"/></svg>' },
+    graphic: { label:'Desain Grafis', tagline:'identitas visual', color:'#FF9F5A',
+      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3.2"/><path d="M11 15.5L16 6l6 14H11z"/></svg>' },
+    system: { label:'Systems Analyst', tagline:'analisis sistem', color:'#6EE7B7',
+      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.6L11 16M17.2 7.6L13 16"/></svg>' },
+    frontend: { label:'Frontend Development', tagline:'pengembangan frontend', color:'#5AB8FF',
+      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6L2 12l6 6M16 6l6 6-6 6"/></svg>' },
+    product: { label:'Product Management', tagline:'manajemen produk', color:'#FFD166',
+      icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>' }
   };
 
   const projGrid = document.getElementById('projGrid');
@@ -904,18 +633,17 @@
   let currentProjects = [];
   let currentRole = 'uiux';
 
-  function escapeHTML(str){
-    const d = document.createElement('div');
-    d.textContent = str || '';
-    return d.innerHTML;
-  }
+  function escapeHTML(str){ const d = document.createElement('div'); d.textContent = str || ''; return d.innerHTML; }
 
   function projCardHTML(p){
     const data = roleData[p.role] || roleData.uiux;
     const href = p.link ? p.link : '#';
     const target = p.link ? ' target="_blank" rel="noopener"' : '';
+    const thumb = p.image
+      ? `<div class="proj-thumb"><img src="${p.image}" alt="${escapeHTML(p.title)}" loading="lazy"></div>`
+      : `<div class="proj-thumb noimg"><div class="ic">${data.icon}</div></div>`;
     return `
-      <div class="proj-thumb"><div class="ic">${data.icon}</div></div>
+      ${thumb}
       <div class="proj-body">
         <span class="proj-tag">${data.label}</span>
         <h3>${escapeHTML(p.title)}</h3>
@@ -945,9 +673,7 @@
       });
     });
     const addCard = document.getElementById('addProjCard');
-    if(addCard){
-      addCard.addEventListener('click', ()=>{ if(window.openProjModal) window.openProjModal('add', null); });
-    }
+    if(addCard){ addCard.addEventListener('click', ()=>{ if(window.openProjModal) window.openProjModal('add', null); }); }
   }
 
   function render(){
@@ -973,29 +699,20 @@
     attachProjectHandlers();
   }
 
-  window.renderProjects = function(list){
-    currentProjects = list;
-    render();
-  };
+  window.renderProjects = function(list){ currentProjects = list; render(); };
+  window.setAdminMode = function(isAdmin){ isAdminMode = isAdmin; render(); };
 
-  window.setAdminMode = function(isAdmin){
-    isAdminMode = isAdmin;
-    render();
-  };
-
-  // ---------- role switching ----------
   const root = document.documentElement;
-  const schematicIcon = document.getElementById('schematicIcon');
+  const photoDuotone = document.getElementById('photoDuotone');
+  const photoIcon = document.getElementById('photoIcon');
   const schematicLabel = document.getElementById('schematicLabel');
   const typeRole = document.getElementById('typeRole');
   const pills = document.querySelectorAll('.role-pill');
   const discCards = document.querySelectorAll('.disc-card');
+  const glow1 = document.getElementById('glow1');
+  const glow2 = document.getElementById('glow2');
 
-  function hexToRgb(hex){
-    const v = hex.replace('#','');
-    const n = parseInt(v,16);
-    return `${(n>>16)&255},${(n>>8)&255},${n&255}`;
-  }
+  function hexToRgb(hex){ const v = hex.replace('#',''); const n = parseInt(v,16); return `${(n>>16)&255},${(n>>8)&255},${n&255}`; }
 
   function setRole(role, filterProjects){
     currentRole = role;
@@ -1003,53 +720,41 @@
     root.style.setProperty('--accent', data.color);
     root.style.setProperty('--accent-rgb', hexToRgb(data.color));
     root.style.setProperty('--accent-soft', `rgba(${hexToRgb(data.color)},0.14)`);
-    schematicIcon.innerHTML = data.icon;
+    photoIcon.innerHTML = data.icon;
     schematicLabel.textContent = data.label;
     typeRole.textContent = data.tagline;
+    glow1.style.background = data.color;
+    glow2.style.background = data.color;
 
     pills.forEach(p=> p.classList.toggle('active', p.dataset.role === role));
     discCards.forEach(c=> c.classList.toggle('active', c.dataset.role === role));
 
     if(filterProjects){
-      document.querySelectorAll('.proj-card').forEach(c=>{
-        c.classList.toggle('hidden', c.dataset.role !== role);
-      });
+      document.querySelectorAll('.proj-card').forEach(c=>{ c.classList.toggle('hidden', c.dataset.role !== role); });
     }
   }
 
   pills.forEach(p=> p.addEventListener('click', ()=> setRole(p.dataset.role, true)));
   discCards.forEach(c=> c.addEventListener('click', ()=> setRole(c.dataset.role, true)));
 
-  // gentle auto-cycle on load until user interacts
   let autoCycle = true;
   const order = ['uiux','graphic','system','frontend','product'];
   let idx = 0;
-  const cycleTimer = setInterval(()=>{
-    if(!autoCycle) return;
-    idx = (idx+1) % order.length;
-    setRole(order[idx], false);
-  }, 3200);
+  const cycleTimer = setInterval(()=>{ if(!autoCycle) return; idx = (idx+1) % order.length; setRole(order[idx], false); }, 3200);
   ['click','touchstart'].forEach(evt=>{
     document.getElementById('roleSwitch').addEventListener(evt, ()=>{ autoCycle = false; clearInterval(cycleTimer); });
     document.getElementById('discGrid').addEventListener(evt, ()=>{ autoCycle = false; clearInterval(cycleTimer); });
   });
 
-  // ---------- nav scroll state ----------
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', ()=>{
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
+  window.addEventListener('scroll', ()=>{ nav.classList.toggle('scrolled', window.scrollY > 40); });
 
-  // ---------- reveal on scroll ----------
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
-    });
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   revealEls.forEach(el=> io.observe(el));
 
-  // init
   setRole('uiux', false);
 </script>
 
@@ -1058,7 +763,6 @@
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  // ======================================================================
   const firebaseConfig = {
     apiKey: "AIzaSyCm7Bqa7clL8LBD5BrxZyGw6_6Fk2pdU80",
     authDomain: "portofolio-bagus-17df4.firebaseapp.com",
@@ -1067,23 +771,22 @@
     messagingSenderId: "59408563462",
     appId: "1:59408563462:web:e7b27887abfc2db0d03287"
   };
-  // ======================================================================
 
   const sampleProjects = [
-    { id:'sample-1', role:'uiux', title:'Redesain Aplikasi Perbankan Digital', desc:'Menata ulang alur transaksi utama untuk mengurangi langkah pengguna dan meningkatkan kepercayaan.', link:'' },
-    { id:'sample-2', role:'graphic', title:'Identitas Visual Kedai Kopi Lokal', desc:'Sistem branding lengkap: logo, palet warna, dan aset kemasan.', link:'' },
-    { id:'sample-3', role:'system', title:'Pemetaan Proses Bisnis Logistik', desc:'Menyusun diagram alur dan dokumen kebutuhan sistem untuk tim gudang.', link:'' },
-    { id:'sample-4', role:'frontend', title:'Dashboard Analitik Real-time', desc:'Antarmuka data interaktif dibangun dengan performa dan aksesibilitas sebagai prioritas.', link:'' },
-    { id:'sample-5', role:'product', title:'Peluncuran Fitur Berlangganan', desc:'Menyusun roadmap, prioritas fitur, dan strategi peluncuran bersama tim lintas fungsi.', link:'' },
-    { id:'sample-6', role:'uiux', title:'Desain Sistem untuk Startup EdTech', desc:'Membangun design system yang dipakai konsisten di lebih dari 10 halaman produk.', link:'' }
+    { id:'p1', role:'product', title:'Quipper Self Mentoring — Binar Academy', desc:'Riset SWOT, business model canvas, user persona, PRD, hingga usability testing untuk fitur mentoring baru Quipper.', link:'https://drive.google.com/drive/folders/1sSX6IDq9gwFzf5ZEjPCnT0kqszNkbzv6?usp=sharing', image:'assets/proj-12.jpg' },
+    { id:'p2', role:'product', title:'Calmifia — Product Requirement Document', desc:'Menyusun PRD aplikasi kesehatan mental bersama tim, mencakup fitur konsultasi, meditasi, dan jurnal.', link:'https://drive.google.com/drive/folders/1sSX6IDq9gwFzf5ZEjPCnT0kqszNkbzv6?usp=sharing', image:'assets/proj-13.jpg' },
+    { id:'p3', role:'system', title:'SIMORIS — Software Tester', desc:'Menguji sistem monitoring distribusi inseminasi buatan untuk kebutuhan agroindustri di Jember.', link:'https://drive.google.com/drive/folders/1sSX6IDq9gwFzf5ZEjPCnT0kqszNkbzv6?usp=sharing', image:'assets/proj-14.jpg' },
+    { id:'p4', role:'frontend', title:'SIMATA — Frontend Coordinator', desc:'Membangun tampilan frontend sistem akademik untuk pengajuan sempro, sidang, dan arsip judul skripsi.', link:'', image:'assets/proj-15.jpg' },
+    { id:'p5', role:'uiux', title:'HydroBid — Desain UI Marketplace Hidroponik', desc:'Merancang antarmuka aplikasi jual-beli hasil hidroponik dari analisis sistem hingga object oriented design.', link:'https://drive.google.com/drive/folders/1aCL1VjMGObsroj78PpVpHn22zBDb_hj6?usp=sharing', image:'assets/proj-16.jpg' },
+    { id:'p6', role:'uiux', title:'PutusApp — Desain UI Pencarian Kuliner', desc:'Aplikasi pencarian makanan terdekat dan termurah, dirancang untuk mata kuliah Pengantar Rekayasa Perangkat Lunak.', link:'', image:'assets/proj-17.jpg' },
+    { id:'p7', role:'graphic', title:'IT Convert 2024 — Open Recruitment', desc:'Seri poster open recruitment panitia bertema pixel-art untuk acara IT Convert HIMASIF.', link:'', image:'assets/proj-18.jpg' },
+    { id:'p8', role:'graphic', title:'Rektor Cup 2023 — Basketball Campaign', desc:'Identitas visual dan materi promosi turnamen basket antar fakultas "Rektor Cup".', link:'', image:'assets/proj-19.jpg' },
+    { id:'p9', role:'graphic', title:'Highst — Merchandise & Branding', desc:'Desain merchandise (kaos, totebag, keychain) untuk brand komunitas Highst.', link:'', image:'assets/proj-26.jpg' }
   ];
 
   const isFirebaseConfigured = firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith('GANTI');
 
-  let app, auth, db;
-  let currentUser = null;
-  let editingId = null;
-  let deletingId = null;
+  let app, auth, db, currentUser = null, editingId = null, deletingId = null;
 
   const loginModal = document.getElementById('loginModal');
   const projModal = document.getElementById('projModal');
@@ -1100,23 +803,18 @@
   document.getElementById('closeDeleteModal').addEventListener('click', ()=> closeModal(deleteModal));
   document.getElementById('cancelProj').addEventListener('click', ()=> closeModal(projModal));
   document.getElementById('cancelDelete').addEventListener('click', ()=> closeModal(deleteModal));
-  [loginModal, projModal, deleteModal].forEach(m=>{
-    m.addEventListener('click', (e)=>{ if(e.target === m) closeModal(m); });
-  });
+  [loginModal, projModal, deleteModal].forEach(m=>{ m.addEventListener('click', (e)=>{ if(e.target === m) closeModal(m); }); });
 
   adminFab.addEventListener('click', ()=>{
-    if(currentUser){
-      document.getElementById('projects').scrollIntoView({ behavior:'smooth' });
-      return;
-    }
-    document.getElementById('loginError').textContent = isFirebaseConfigured ? '' : 'Firebase belum dikonfigurasi — lihat PANDUAN-SETUP.md.';
+    if(currentUser){ document.getElementById('projects').scrollIntoView({ behavior:'smooth' }); return; }
+    document.getElementById('loginError').textContent = isFirebaseConfigured ? '' : 'Firebase belum dikonfigurasi.';
     openModal(loginModal);
   });
 
   async function loadProjects(){
     if(!isFirebaseConfigured){
       window.renderProjects(sampleProjects);
-      projSectionSub.textContent = 'Menampilkan data contoh — hubungkan Firebase (lihat PANDUAN-SETUP.md) supaya proyek asli tersimpan permanen.';
+      projSectionSub.textContent = 'Klik salah satu peran di atas untuk memfilter proyek berdasarkan disiplin.';
       return;
     }
     try{
@@ -1125,13 +823,11 @@
       const list = [];
       snap.forEach(d=> list.push({ id:d.id, ...d.data() }));
       window.renderProjects(list.length ? list : sampleProjects);
-      projSectionSub.textContent = list.length
-        ? 'Klik salah satu peran di atas untuk memfilter proyek berdasarkan disiplin.'
-        : 'Belum ada proyek tersimpan — login sebagai admin untuk mulai menambahkan.';
+      projSectionSub.textContent = 'Klik salah satu peran di atas untuk memfilter proyek berdasarkan disiplin.';
     }catch(err){
       console.error(err);
       window.renderProjects(sampleProjects);
-      projSectionSub.textContent = 'Gagal memuat data dari Firebase, menampilkan data contoh sementara.';
+      projSectionSub.textContent = 'Klik salah satu peran di atas untuk memfilter proyek berdasarkan disiplin.';
     }
   }
 
@@ -1139,22 +835,17 @@
     const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPassword').value;
     const errEl = document.getElementById('loginError');
-    if(!isFirebaseConfigured){ errEl.textContent = 'Firebase belum dikonfigurasi — lihat PANDUAN-SETUP.md.'; return; }
+    if(!isFirebaseConfigured){ errEl.textContent = 'Firebase belum dikonfigurasi.'; return; }
     if(!email || !pass){ errEl.textContent = 'Isi email dan password terlebih dahulu.'; return; }
     try{
       await signInWithEmailAndPassword(auth, email, pass);
       closeModal(loginModal);
       document.getElementById('loginEmail').value = '';
       document.getElementById('loginPassword').value = '';
-    }catch(err){
-      errEl.textContent = 'Login gagal. Periksa kembali email dan password.';
-    }
+    }catch(err){ errEl.textContent = 'Login gagal. Periksa kembali email dan password.'; }
   });
 
-  document.getElementById('btnLogout').addEventListener('click', async ()=>{
-    if(auth) await signOut(auth);
-  });
-
+  document.getElementById('btnLogout').addEventListener('click', async ()=>{ if(auth) await signOut(auth); });
   document.getElementById('btnAddProj').addEventListener('click', ()=> window.openProjModal('add', null));
 
   window.openProjModal = function(mode, proj){
@@ -1164,43 +855,36 @@
     document.getElementById('fDesc').value = proj ? proj.desc : '';
     document.getElementById('fRole').value = proj ? proj.role : 'uiux';
     document.getElementById('fLink').value = proj ? (proj.link || '') : '';
+    document.getElementById('fImage').value = proj ? (proj.image || '') : '';
     document.getElementById('projError').textContent = '';
     openModal(projModal);
   };
 
-  window.openDeleteModal = function(id){
-    deletingId = id;
-    openModal(deleteModal);
-  };
+  window.openDeleteModal = function(id){ deletingId = id; openModal(deleteModal); };
 
   document.getElementById('saveProj').addEventListener('click', async ()=>{
     const title = document.getElementById('fTitle').value.trim();
     const desc = document.getElementById('fDesc').value.trim();
     const role = document.getElementById('fRole').value;
     const link = document.getElementById('fLink').value.trim();
+    const image = document.getElementById('fImage').value.trim();
     const errEl = document.getElementById('projError');
     if(!title || !desc){ errEl.textContent = 'Judul dan deskripsi wajib diisi.'; return; }
     if(!currentUser){ errEl.textContent = 'Sesi admin berakhir, silakan login ulang.'; return; }
     try{
       if(editingId){
-        await updateDoc(doc(db,'projects',editingId), { title, desc, role, link });
+        await updateDoc(doc(db,'projects',editingId), { title, desc, role, link, image });
       } else {
-        await addDoc(collection(db,'projects'), { title, desc, role, link, createdAt: serverTimestamp() });
+        await addDoc(collection(db,'projects'), { title, desc, role, link, image, createdAt: serverTimestamp() });
       }
       closeModal(projModal);
       loadProjects();
-    }catch(err){
-      errEl.textContent = 'Gagal menyimpan. Cek koneksi internet atau aturan Firestore.';
-    }
+    }catch(err){ errEl.textContent = 'Gagal menyimpan. Cek koneksi internet atau aturan Firestore.'; }
   });
 
   document.getElementById('confirmDelete').addEventListener('click', async ()=>{
     if(!deletingId || !currentUser) return;
-    try{
-      await deleteDoc(doc(db,'projects',deletingId));
-    }catch(err){
-      console.error(err);
-    }
+    try{ await deleteDoc(doc(db,'projects',deletingId)); }catch(err){ console.error(err); }
     closeModal(deleteModal);
     loadProjects();
   });
@@ -1221,10 +905,7 @@
         setAdminVisuals(!!user);
         loadProjects();
       });
-    }catch(err){
-      console.error('Firebase init gagal', err);
-      loadProjects();
-    }
+    }catch(err){ console.error('Firebase init gagal', err); loadProjects(); }
   } else {
     loadProjects();
   }
