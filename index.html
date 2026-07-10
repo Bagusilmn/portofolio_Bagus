@@ -572,7 +572,12 @@
   function iconEdit(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>'; }
   function iconDel(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0l-1 14a2 2 0 01-2 2H7a2 2 0 01-2-2L4 6h16z"/></svg>'; }
 
-  function renderProjects(){
+  /* FIX: renamed from renderProjects -> doRenderProjects.
+     Previously this internal function shared the exact name that
+     window.renderProjects was reassigned to below, so calling
+     renderProjects() inside the wrapper called the wrapper itself
+     forever (infinite recursion / Maximum call stack size exceeded). */
+  function doRenderProjects(){
     projGrid.innerHTML = '';
     currentProjects.forEach(p=>{
       const card = document.createElement('div');
@@ -597,14 +602,16 @@
       btn.addEventListener('click', e=>{ e.preventDefault(); window.openDeleteModal('project', currentProjects[i].id); });
     });
   }
-  window.renderProjects = function(list){ currentProjects = list; renderProjects(); };
+  window.renderProjects = function(list){ currentProjects = list; doRenderProjects(); };
 
   /* ---------- EXPERIENCE render ---------- */
   const expTimeline = document.getElementById('expTimeline');
   const loadingNoteExp = document.getElementById('loadingNoteExp');
   let currentExp = [];
 
-  function renderExperience(){
+  /* FIX: renamed from renderExperience -> doRenderExperience for the same
+     reason as doRenderProjects above. */
+  function doRenderExperience(){
     expTimeline.innerHTML = '';
     currentExp.forEach((e,i)=>{
       const item = document.createElement('div');
@@ -625,7 +632,7 @@
     loadingNoteExp.style.display = 'none';
     expTimeline.style.display = 'flex';
   }
-  window.renderExperience = function(list){ currentExp = list; renderExperience(); };
+  window.renderExperience = function(list){ currentExp = list; doRenderExperience(); };
 
   /* ---------- CERTIFICATES render ---------- */
   const certCarousel = document.getElementById('certCarousel');
@@ -638,6 +645,9 @@
       <div class="cert-admin-controls"><button class="edit" type="button">${iconEdit()}</button><button class="del" type="button">${iconDel()}</button></div>`;
   }
 
+  /* Note: renderCerts() was already safely named differently from its
+     exported wrapper window.renderCertificates, so no collision here —
+     left as-is. */
   function renderCerts(){
     certCarousel.innerHTML = '';
     const list = allCerts.filter(c => c.category === activeCertCat);
@@ -680,8 +690,8 @@
   /* ---------- shared admin mode toggle ---------- */
   window.setAdminMode = function(isAdmin){
     isAdminMode = isAdmin;
-    renderProjects();
-    renderExperience();
+    doRenderProjects();
+    doRenderExperience();
     renderCerts();
   };
 </script>
