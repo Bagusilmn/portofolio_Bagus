@@ -93,14 +93,10 @@
 
   /* ---------- hero ---------- */
   header.hero{ position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:150px 0 70px; z-index:1; overflow:hidden; }
-  .hero-inner{ position:relative; z-index:2; }
-  .hero-text-col{ max-width:560px; }
-  .hero-photo-bleed{
-    position:absolute; top:0; right:0; bottom:0; width:38%; z-index:1;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 16%);
-    mask-image: linear-gradient(90deg, transparent 0%, black 16%);
-  }
-  .hero-photo-bleed .photo-frame{ width:100%; height:100%; aspect-ratio:auto; border-radius:0; box-shadow:none; }
+  .hero-inner{ position:relative; z-index:2; display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center; }
+  .hero-text-col{ text-align:left; }
+  .hero-photo-bleed{ position:relative; width:100%; }
+  .hero-photo-bleed .photo-frame{ width:100%; aspect-ratio:4/5; border-radius:26px; box-shadow:0 30px 70px -20px rgba(0,0,0,.6); }
   .hero-badge{
     background:var(--glass-bg); backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%); border:1px solid var(--glass-border); display:inline-flex; align-items:center; gap:9px; font-family:var(--font-mono); font-size:11px; color:var(--text-dim);
     border-radius:100px; padding:8px 16px 8px 10px; margin-bottom:28px;
@@ -321,10 +317,9 @@
   .loading-note{ font-family:var(--font-mono); font-size:12px; color:var(--text-faint); padding:20px 0; }
 
   @media (max-width: 1040px){
-    .hero-photo-bleed{ position:relative; width:100%; height:340px; top:auto; right:auto; bottom:auto; margin-top:36px; -webkit-mask-image:none; mask-image:none; order:2; }
-    .hero-photo-bleed .photo-frame{ border-radius:22px; }
-    header.hero{ display:flex; flex-direction:column; padding-top:130px; }
-    .hero-inner{ order:1; }
+    .hero-inner{ grid-template-columns:1fr; gap:36px; }
+    .hero-photo-bleed{ max-width:360px; margin:0 auto; order:2; }
+    header.hero{ padding-top:130px; }
     .about-grid{ grid-template-columns:1fr; gap:36px; }
     .about-facts{ flex-wrap:wrap; }
     .fact{ flex:0 0 calc(50% - 8px); margin-bottom:0; }
