@@ -93,6 +93,16 @@
 
   /* ---------- hero ---------- */
   header.hero{ position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:150px 0 70px; z-index:1; overflow:hidden; }
+  .hero-spotlight{
+    position:absolute; inset:0; z-index:0; pointer-events:none;
+    background: radial-gradient(500px circle at var(--mx,50%) var(--my,30%), rgba(155,92,255,.12), transparent 60%);
+    transition: background .1s linear;
+  }
+  .marquee-band{ position:relative; z-index:1; overflow:hidden; border-top:1px solid var(--glass-border); border-bottom:1px solid var(--glass-border); padding:16px 0; background:var(--glass-bg); }
+  .marquee-track{ display:flex; width:max-content; animation: marqueeScroll 28s linear infinite; }
+  .marquee-track span{ font-family:var(--font-mono); font-size:13px; letter-spacing:.08em; color:var(--text-faint); padding:0 22px; white-space:nowrap; }
+  .marquee-track span.sep{ color:var(--accent); transition:color .5s var(--ease); }
+  @keyframes marqueeScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
   .hero-inner{ position:relative; z-index:2; display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center; }
   .hero-text-col{ text-align:left; }
   .hero-photo-bleed{ position:relative; width:100%; }
@@ -363,18 +373,10 @@
 <header class="hero" id="heroSection">
   <div class="hero-spotlight" id="heroSpotlight"></div>
   <div class="ghost-word" style="top:8%; left:-2%; font-size:min(22vw,280px);">Portofolio</div>
-  <div class="hero-photo-bleed">
-    <div class="photo-frame">
-      <img src="assets/bagus-photo.jpg" alt="Bagus Ilman Huda">
-      <div class="photo-duotone" id="photoDuotone"></div>
-      <div class="photo-corner" id="photoIcon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="9" rx="1.5"/><rect x="9" y="11" width="12" height="9" rx="1.5"/></svg></div>
-      <div class="photo-tag"><div class="role-label">peran aktif<b id="schematicLabel">UI/UX Design</b></div></div>
-    </div>
-  </div>
   <div class="wrap hero-inner">
     <div class="hero-text-col">
-      <div class="hero-badge"><span class="pulse"></span> Mahasiswa Sistem Informasi — Universitas Jember</div>
-      <h1 class="hero-name">Bagus Ilman<span class="last">Huda.</span></h1>
+      <div class="hero-badge"><span class="pulse"></span> <span id="heroBadgeText">Mahasiswa Sistem Informasi — Universitas Jember</span></div>
+      <h1 class="hero-name"><span id="heroFirstName">Bagus Ilman</span><span class="last" id="heroLastName">Huda.</span></h1>
       <p class="hero-tagline">Bekerja di persimpangan <span class="hi" id="typeRole">desain antarmuka</span> — merancang, menganalisis, dan membangun produk digital dari ide sampai jadi.</p>
       <div class="role-switch" id="roleSwitch">
         <button class="role-pill active" data-role="uiux">UI/UX Design</button>
@@ -386,6 +388,14 @@
       <div class="hero-ctas">
         <a href="#projects" class="btn-primary">Lihat Proyek</a>
         <a href="#contact" class="btn-ghost">Ngobrol bareng saya →</a>
+      </div>
+    </div>
+    <div class="hero-photo-bleed">
+      <div class="photo-frame">
+        <img src="assets/bagus-photo.jpg" alt="Bagus Ilman Huda" id="heroPhotoImg">
+        <div class="photo-duotone" id="photoDuotone"></div>
+        <div class="photo-corner" id="photoIcon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="9" rx="1.5"/><rect x="9" y="11" width="12" height="9" rx="1.5"/></svg></div>
+        <div class="photo-tag"><div class="role-label">peran aktif<b id="schematicLabel">UI/UX Design</b></div></div>
       </div>
     </div>
   </div>
@@ -401,14 +411,18 @@
 
 <section id="about" class="panel">
   <div class="wrap">
+    <div class="admin-bar" id="adminBarProfile">
+      <span><span class="dot"></span>Mode admin — kelola profil</span>
+      <div class="admin-bar-actions"><button id="btnEditProfile">Edit Profil</button></div>
+    </div>
     <div class="about-grid">
       <div class="reveal">
         <span class="eyebrow">TENTANG</span>
         <h2 style="margin-top:14px;">Satu orang, lima cara melihat masalah yang sama.</h2>
       </div>
       <div class="reveal about-text" style="transition-delay:.1s;">
-        <p>Saya <strong>Bagus Ilman Huda</strong>, mahasiswa Sistem Informasi di Universitas Jember dengan minat besar di bidang IT dan bisnis. Saya pernah berperan sebagai <strong>software tester, desainer UI/UX, frontend developer, desainer grafis, hingga product manager</strong> — didukung sertifikasi Product Management dan pengalaman berorganisasi.</p>
-        <p>Kombinasi kelima keahlian ini membantu saya berkomunikasi lintas tim — dari desainer, engineer, sampai stakeholder bisnis — tanpa kehilangan detail penting di setiap serah terima.</p>
+        <p id="aboutBio1">Saya <strong>Bagus Ilman Huda</strong>, mahasiswa Sistem Informasi di Universitas Jember dengan minat besar di bidang IT dan bisnis. Saya pernah berperan sebagai <strong>software tester, desainer UI/UX, frontend developer, desainer grafis, hingga product manager</strong> — didukung sertifikasi Product Management dan pengalaman berorganisasi.</p>
+        <p id="aboutBio2">Kombinasi kelima keahlian ini membantu saya berkomunikasi lintas tim — dari desainer, engineer, sampai stakeholder bisnis — tanpa kehilangan detail penting di setiap serah terima.</p>
         <div class="about-facts">
           <div class="fact"><div class="num">5</div><div class="label">Disiplin dikuasai</div></div>
           <div class="fact"><div class="num">9+</div><div class="label">Proyek nyata</div></div>
@@ -524,9 +538,9 @@
       <h2>Punya proyek? Mari bicarakan.</h2>
       <p>Terbuka untuk kolaborasi, proyek lepas, maupun peran penuh waktu di bidang desain, sistem, atau produk.</p>
       <div class="contact-links">
-        <a href="mailto:bagusilmanhuda@gmail.com" class="primary">bagusilmanhuda@gmail.com</a>
-        <a href="https://www.linkedin.com/in/bagusilmanhuda" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://instagram.com/bagus_ilmn" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:bagusilmanhuda@gmail.com" class="primary" id="contactEmailLink">bagusilmanhuda@gmail.com</a>
+        <a href="https://www.linkedin.com/in/bagusilmanhuda" target="_blank" rel="noopener" id="contactLinkedin">LinkedIn</a>
+        <a href="https://instagram.com/bagus_ilmn" target="_blank" rel="noopener" id="contactInstagram">Instagram</a>
       </div>
     </div>
   </div>
@@ -577,6 +591,18 @@
       <div class="field"><label>Penyelenggara (opsional)</label><input id="cIssuer"></div>
       <div class="field"><label>URL Gambar</label><input id="cImage" placeholder="assets/certs/nama-file.jpg"></div>
       <div class="field"><label>Link (opsional)</label><input id="cLink" placeholder="https://..."></div>
+    </div>
+
+    <div class="field-group" data-for="profile">
+      <div class="field"><label>Nama Depan</label><input id="prFirstName" placeholder="Bagus Ilman"></div>
+      <div class="field"><label>Nama Belakang</label><input id="prLastName" placeholder="Huda."></div>
+      <div class="field"><label>Badge / Status Singkat</label><input id="prBadge" placeholder="Mahasiswa Sistem Informasi — Universitas Jember"></div>
+      <div class="field"><label>URL Foto</label><input id="prPhoto" placeholder="assets/nama-foto.jpg"></div>
+      <div class="field"><label>Bio — Paragraf 1</label><textarea id="prBio1"></textarea></div>
+      <div class="field"><label>Bio — Paragraf 2</label><textarea id="prBio2"></textarea></div>
+      <div class="field"><label>Email</label><input id="prEmail" placeholder="nama@email.com"></div>
+      <div class="field"><label>Link LinkedIn</label><input id="prLinkedin" placeholder="https://linkedin.com/in/..."></div>
+      <div class="field"><label>Link Instagram</label><input id="prInstagram" placeholder="https://instagram.com/..."></div>
     </div>
 
     <div class="modal-actions">
@@ -824,7 +850,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCm7Bqa7clL8LBD5BrxZyGw6_6Fk2pdU80",
@@ -872,6 +898,33 @@
     { id:'c13', category:'organisasi', title:'Sie Acara — Penyerahan Mahasiswa Baru', issuer:'HIMASIF 2024', image:'assets/certs/panitia-8.jpg', link:'' }
   ];
 
+  const defaultProfile = {
+    firstName:'Bagus Ilman', lastName:'Huda.',
+    badge:'Mahasiswa Sistem Informasi — Universitas Jember',
+    photo:'assets/bagus-photo.jpg',
+    bio1:'Saya <strong>Bagus Ilman Huda</strong>, mahasiswa Sistem Informasi di Universitas Jember dengan minat besar di bidang IT dan bisnis. Saya pernah berperan sebagai <strong>software tester, desainer UI/UX, frontend developer, desainer grafis, hingga product manager</strong> — didukung sertifikasi Product Management dan pengalaman berorganisasi.',
+    bio2:'Kombinasi kelima keahlian ini membantu saya berkomunikasi lintas tim — dari desainer, engineer, sampai stakeholder bisnis — tanpa kehilangan detail penting di setiap serah terima.',
+    email:'bagusilmanhuda@gmail.com',
+    linkedin:'https://www.linkedin.com/in/bagusilmanhuda',
+    instagram:'https://instagram.com/bagus_ilmn'
+  };
+  let currentProfile = { ...defaultProfile };
+
+  window.renderProfile = function(p){
+    currentProfile = p;
+    document.getElementById('heroFirstName').textContent = p.firstName;
+    document.getElementById('heroLastName').textContent = p.lastName;
+    document.getElementById('heroBadgeText').textContent = p.badge;
+    document.getElementById('heroPhotoImg').src = p.photo;
+    document.getElementById('aboutBio1').innerHTML = p.bio1;
+    document.getElementById('aboutBio2').innerHTML = p.bio2;
+    const emailLink = document.getElementById('contactEmailLink');
+    emailLink.href = 'mailto:' + p.email;
+    emailLink.textContent = p.email;
+    document.getElementById('contactLinkedin').href = p.linkedin;
+    document.getElementById('contactInstagram').href = p.instagram;
+  };
+
   const isFirebaseConfigured = firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith('GANTI');
   let app, auth, db, currentUser = null;
   let editingId = null, editingType = null, deletingType = null, deletingId = null;
@@ -902,8 +955,14 @@
       window.renderProjects(sampleProjects);
       window.renderExperience(sampleExperience.sort((a,b)=>a.order-b.order));
       window.renderCertificates(sampleCertificates);
+      window.renderProfile(defaultProfile);
       return;
     }
+    try{
+      const pdoc = await getDoc(doc(db,'settings','profile'));
+      window.renderProfile(pdoc.exists() ? { ...defaultProfile, ...pdoc.data() } : defaultProfile);
+    }catch(err){ console.error(err); window.renderProfile(defaultProfile); }
+
     try{
       const pq = query(collection(db,'projects'), orderBy('createdAt','desc'));
       const psnap = await getDocs(pq);
@@ -944,9 +1003,10 @@
   document.getElementById('btnAddProj').addEventListener('click', ()=> window.openEntryModal('project','add',null));
   document.getElementById('btnAddExp').addEventListener('click', ()=> window.openEntryModal('experience','add',null));
   document.getElementById('btnAddCert').addEventListener('click', ()=> window.openEntryModal('certificate','add',null));
+  document.getElementById('btnEditProfile').addEventListener('click', ()=> window.openEntryModal('profile','edit',currentProfile));
 
   const fieldGroups = document.querySelectorAll('.field-group');
-  const typeLabels = { project:'Proyek', experience:'Pengalaman', certificate:'Sertifikat' };
+  const typeLabels = { project:'Proyek', experience:'Pengalaman', certificate:'Sertifikat', profile:'Profil' };
 
   window.openEntryModal = function(type, mode, data){
     editingType = type; editingId = mode === 'edit' ? data.id : null;
@@ -973,6 +1033,16 @@
       document.getElementById('cIssuer').value = data ? (data.issuer||'') : '';
       document.getElementById('cImage').value = data ? (data.image||'') : '';
       document.getElementById('cLink').value = data ? (data.link||'') : '';
+    } else if(type === 'profile'){
+      document.getElementById('prFirstName').value = data.firstName || '';
+      document.getElementById('prLastName').value = data.lastName || '';
+      document.getElementById('prBadge').value = data.badge || '';
+      document.getElementById('prPhoto').value = data.photo || '';
+      document.getElementById('prBio1').value = data.bio1 || '';
+      document.getElementById('prBio2').value = data.bio2 || '';
+      document.getElementById('prEmail').value = data.email || '';
+      document.getElementById('prLinkedin').value = data.linkedin || '';
+      document.getElementById('prInstagram').value = data.instagram || '';
     }
     openModal(entryModal);
   };
@@ -1001,6 +1071,26 @@
       if(!title || !image){ errEl.textContent = 'Judul dan URL gambar wajib diisi.'; return; }
       colName = 'certificates';
       payload = { title, category: document.getElementById('cCategory').value, issuer: document.getElementById('cIssuer').value.trim(), image, link: document.getElementById('cLink').value.trim() };
+    } else if(editingType === 'profile'){
+      const firstName = document.getElementById('prFirstName').value.trim();
+      const lastName = document.getElementById('prLastName').value.trim();
+      if(!firstName){ errEl.textContent = 'Nama depan wajib diisi.'; return; }
+      const payload = {
+        firstName, lastName,
+        badge: document.getElementById('prBadge').value.trim(),
+        photo: document.getElementById('prPhoto').value.trim() || defaultProfile.photo,
+        bio1: document.getElementById('prBio1').value.trim(),
+        bio2: document.getElementById('prBio2').value.trim(),
+        email: document.getElementById('prEmail').value.trim(),
+        linkedin: document.getElementById('prLinkedin').value.trim(),
+        instagram: document.getElementById('prInstagram').value.trim()
+      };
+      try{
+        await setDoc(doc(db,'settings','profile'), payload, { merge:true });
+        closeModal(entryModal);
+        loadAll();
+      }catch(err){ console.error(err); errEl.textContent = 'Gagal menyimpan profil. Cek koneksi atau aturan Firestore.'; }
+      return;
     }
     try{
       if(editingId){ await updateDoc(doc(db,colName,editingId), payload); }
@@ -1023,6 +1113,7 @@
     document.getElementById('adminBar').classList.toggle('show', isAdmin);
     document.getElementById('adminBarExp').classList.toggle('show', isAdmin);
     document.getElementById('adminBarCert').classList.toggle('show', isAdmin);
+    document.getElementById('adminBarProfile').classList.toggle('show', isAdmin);
     window.setAdminMode(isAdmin);
   }
 
